@@ -36,8 +36,8 @@ public class Patient {
 	@Column(value = "sex")
 	private String sex;
 
-	@Column(value = "active")
-	private Boolean activeStatus;
+	@Column(value = "covidactivestatus")
+	private Boolean covidActiveStatus;
 
 	@Column(value = "mobilenumber")
 	private String mobile;
@@ -72,4 +72,46 @@ public class Patient {
 	@Column(value = "dischargedon")
 	private LocalDate dateOfDischarge;
 
+	@Column(value = "travelhistory")
+	private Boolean travelHistory;
+
+	@Column(value = "contacthistory")
+	private Boolean contactHistory;
+
+	@Column(value = "comorbidity")
+	private Boolean coMorbidity;
+	// list of selected outcomes -dropdown menu
+	@Column(value = "symptomstatus")
+	private String symptomStatus;
+	//list of selected outcomes -dropdown menu
+	@Column(value = "actiontaken")
+	private String actionTaken;
+
+	@Column(value = "bedallotment")
+	private String bedAllotment;
+	// list of selected outcomes -dropdown menu
+	@Column(value = "outcome")
+	private String outcome;
+
+	@Column(value = "dateoffirstresult")
+	private LocalDate dateOfFirstTestResult;
+	// list of selected outcomes -dropdown menu
+	@Column(value = "firstresult")
+	private String firstResult;
+
+	@Column(value = "dateofsecondresult")
+	private LocalDate dateOfSecondTestResult;
+	// list of selected outcomes -dropdown menu
+	@Column(value = "secondresult")
+	private String secondResult;
+
+	@Column(value = "dateofthirdresult")
+	private LocalDate dateOfThirdTestResult;
+	// list of selected outcomes -dropdown menu
+	@Column(value = "thirdresult")
+	private String thirdResult;
+
+	// additional comment
+	@Column(value = "comment")
+	private String comment;
 }

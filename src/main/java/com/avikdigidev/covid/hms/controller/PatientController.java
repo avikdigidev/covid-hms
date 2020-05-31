@@ -42,42 +42,22 @@ public class PatientController {
 
 	@GetMapping("/patient/{dateOfAdmission}")
 	public List<Patient> getPatientById(@PathVariable LocalDate dateOfAdmission) {
-		List<Patient> patientData = patientRepository.getPatientsByAdmitDate(dateOfAdmission);
-		return patientData;
-
+		return patientService.getPatientByAdmitDate(dateOfAdmission);
 	}
 
 	@PostMapping("/patient")
 	public Patient createPatient(@RequestBody Patient newPatient) {
-		String patientId = String.valueOf(UUID.randomUUID());
-		Patient patient = new Patient(patientId, newPatient.getFirstName(), newPatient.getLastName(),
-				newPatient.getAge(), newPatient.getSex(), newPatient.getActiveStatus(), newPatient.getMobile(),
-				newPatient.getLandmark(), newPatient.getCity(), newPatient.getState(), newPatient.getDistrict(),
-				newPatient.getCountry(), newPatient.getPincode(), newPatient.getDateOfBirth(),
-				newPatient.getDateOfDeath(), newPatient.getDateOfAdmission(), newPatient.getDateOfDischarge());
-		patientRepository.save(patient);
-		return patient;
+		return patientService.createPatient(newPatient);
 	}
 
-	@PutMapping("/patient/{patientId}")
+	@PutMapping("/update/{patientId}")
 	public Optional<Patient> updatePatient(@PathVariable String patientId, @RequestBody Patient updatedPatient) {
-		Optional<Patient> patientData = patientRepository.findById(patientId);
-
-		if (patientData.isPresent()) {
-			Patient patient = patientData.get();
-			BeanUtils.copyProperties(updatedPatient, patient);
-			patientRepository.save(patient);
-			return patientData;
-		} else {
-			return null;
-		}
+		return patientService.updatePatient(patientId, updatedPatient);
 	}
 
-	@DeleteMapping(value = "/patient/{patientId}")
+	@DeleteMapping(value = "/delete/{patientId}")
 	public String deletePatient(@PathVariable String patientId) {
-		Boolean result = patientRepository.existsById(patientId);
-		patientRepository.deleteById(patientId);
-		return "{ \"success\" : " + (result ? "true" : "false") + " }";
+		return patientService.deletePatient(patientId);
 	}
 
 }

@@ -49,7 +49,7 @@ public class PatientController {
 	public Patient createPatient(@RequestBody Patient newPatient) {
 		return patientService.createPatient(newPatient);
 	}
-
+//TODO make it work
 	@PutMapping("/update/{patientId}")
 	public Optional<Patient> updatePatient(@PathVariable String patientId, @RequestBody Patient updatedPatient) {
 		return patientService.updatePatient(patientId, updatedPatient);

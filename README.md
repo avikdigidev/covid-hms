@@ -35,7 +35,14 @@ CREATE TABLE covid_hms.patientdetails (
 	travelhistory boolean,
 	PRIMARY KEY (patientid, admittedon)
 );
+===============================================================================================================
 
+
+
+
+
+
+----------------------------------------------------------------------------------------------------------------
 sample insert:
 
 INSERT INTO patientdetails (patientid,admittedon,covidactivestatus,age,city,country,dischargedon,district,dob,dod,firstname,landmark,lastname,mobilenumber,pincode,sex,state) VALUES ('b776ef4e-a269-11ea-bb37-df','2020-08-08',true,16,'nagpur','India',null,'nagpur','2001-01-01',null,'abc','school','xyz','98765914676',412455,'male','mh');

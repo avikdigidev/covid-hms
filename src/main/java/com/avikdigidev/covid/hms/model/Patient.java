@@ -1,11 +1,13 @@
 package com.avikdigidev.covid.hms.model;
 
-import java.time.LocalDate;
+
 
 import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
 import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
 import org.springframework.data.cassandra.core.mapping.Table;
+
+import com.datastax.driver.core.LocalDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

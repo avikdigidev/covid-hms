@@ -1,0 +1,2 @@
+-added entities, crud operations, db setup with script
+- Started working on junit

@@ -12,6 +12,9 @@ import com.avikdigidev.covid.hms.utils.HMSConstants;
 import com.datastax.driver.core.LocalDate;
 
 public interface PatientRepository extends CassandraRepository<Patient, String> {
+	@Query(HMSConstants.ALL_PATIENT_QUERY)
+	List<Patient> getAllPatient();
+	
 	@Query(HMSConstants.SINGLE_PATIENT_QUERY)
 	Optional<Patient> getPatientById(String patientId);
 

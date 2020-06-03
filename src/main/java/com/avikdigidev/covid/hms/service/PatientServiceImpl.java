@@ -1,6 +1,5 @@
 package com.avikdigidev.covid.hms.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -21,9 +20,7 @@ public class PatientServiceImpl implements PatientService {
 	PatientRepository patientRepository;
 
 	public List<Patient> getAllpatients() {
-		Iterable<Patient> result = patientRepository.findAll();
-		List<Patient> patientList = new ArrayList<Patient>();
-		result.forEach(patientList::add);
+		List<Patient> patientList = patientRepository.getAllPatient();
 		return patientList;
 	}
 

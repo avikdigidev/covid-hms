@@ -1,10 +1,9 @@
 package com.avikdigidev.covid.hms.controller;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,10 +14,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.avikdigidev.covid.hms.domain.request.PatientRequest;
+import com.avikdigidev.covid.hms.domain.response.PatientResponse;
 import com.avikdigidev.covid.hms.model.Patient;
 import com.avikdigidev.covid.hms.repository.PatientRepository;
 import com.avikdigidev.covid.hms.service.PatientService;
-import com.datastax.driver.core.LocalDate;
 
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
@@ -35,28 +35,31 @@ public class PatientController {
 		return patientService.getAllpatients();
 	}
 
-	@GetMapping("/patient/{patientId}")
-	public Optional<Patient> getPatientById(@PathVariable String patientId) {
+	@PostMapping("/getPatient/")
+	public PatientResponse getPatientById(@RequestBody PatientRequest patientRequest) {
+		String patientId = patientRequest.getPatientId();
 		return patientService.getPatientById(patientId);
 	}
 
-	@GetMapping("/patient/{dateOfAdmission}")
-	public List<Patient> getPatientById(@PathVariable LocalDate dateOfAdmission) {
+	@PostMapping("/getPatientByAdmitDate")
+	public List<PatientResponse> getPatientByAdmitDate(@RequestBody PatientRequest patientRequest) {
+		Date dateOfAdmission = patientRequest.getDateOfAdmission();
 		return patientService.getPatientByAdmitDate(dateOfAdmission);
 	}
 
-	@PostMapping("/patient")
-	public Patient createPatient(@RequestBody Patient newPatient) {
-		return patientService.createPatient(newPatient);
-	}
-//TODO make it work
-	@PutMapping("/update/{patientId}")
-	public Optional<Patient> updatePatient(@PathVariable String patientId, @RequestBody Patient updatedPatient) {
-		return patientService.updatePatient(patientId, updatedPatient);
+	@PostMapping("/addPatient")
+	public String createPatient(@RequestBody PatientRequest patientRequest) {
+		return patientService.createPatient(patientRequest);
 	}
 
-	@DeleteMapping(value = "/delete/{patientId}")
-	public String deletePatient(@PathVariable String patientId) {
+	@PostMapping("/updatePatient")
+	public String updatePatient(@RequestBody PatientRequest patientRequest) {
+		return patientService.updatePatient(patientRequest);
+	}
+
+	@PostMapping("/deletePatientById")
+	public String deletePatient(@RequestBody PatientRequest patientRequest) {
+		String patientId = patientRequest.getPatientId();
 		return patientService.deletePatient(patientId);
 	}
 

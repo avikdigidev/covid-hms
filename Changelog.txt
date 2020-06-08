@@ -1,2 +1,7 @@
+
 -added entities, crud operations, db setup with script
 - Started working on junit
+-converted all the methods to post
+-added dependencies
+-added seperate request response classes
+-added custom queries

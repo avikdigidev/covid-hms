@@ -8,6 +8,7 @@ import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
 import org.springframework.data.cassandra.core.mapping.Table;
 
 import com.datastax.driver.core.LocalDate;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -96,18 +97,22 @@ public class Patient {
 	private String outcome;
 
 	@Column(value = "dateoffirstresult")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private LocalDate dateOfFirstTestResult;
 	// list of selected outcomes -dropdown menu
 	@Column(value = "firstresult")
 	private String firstResult;
 
 	@Column(value = "dateofsecondresult")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private LocalDate dateOfSecondTestResult;
+	
 	// list of selected outcomes -dropdown menu
 	@Column(value = "secondresult")
 	private String secondResult;
 
 	@Column(value = "dateofthirdresult")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private LocalDate dateOfThirdTestResult;
 	// list of selected outcomes -dropdown menu
 	@Column(value = "thirdresult")
@@ -116,4 +121,6 @@ public class Patient {
 	// additional comment
 	@Column(value = "comment")
 	private String comment;
+	
+	
 }

@@ -54,6 +54,7 @@ public class PatientController {
 
 	@PostMapping("/updatePatient")
 	public String updatePatient(@RequestBody PatientRequest patientRequest) {
+		System.out.println(patientRequest);
 		return patientService.updatePatient(patientRequest);
 	}
 

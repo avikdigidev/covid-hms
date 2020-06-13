@@ -46,8 +46,14 @@ public class PatientServiceImpl implements PatientService {
 		String patientId = String.valueOf(UUID.randomUUID());
 		Patient patient = new Patient();
 		BeanUtils.copyProperties(patientRequest, patient);
+
 		patient.setPatientId(patientId);
+	
+		Date date = new Date(System.currentTimeMillis());
+		patientRequest.setDateOfAdmission(date);
+		
 		convertDateForAdding(patientRequest, patient);
+		System.out.println(patient);
 		patientRepository.save(patient);
 		return "Patient Added Successfully with PaitentId: " + patientId;
 	}
@@ -57,6 +63,7 @@ public class PatientServiceImpl implements PatientService {
 		Patient patientData = patientRepository.getPatientById(patientId);
 		if (patientData != null) {
 			BeanUtils.copyProperties(patientRequest, patientData);
+			
 			convertDateForAdding(patientRequest, patientData);
 			patientRepository.save(patientData);
 			return "Patient Record Updated Successfully";
@@ -77,7 +84,8 @@ public class PatientServiceImpl implements PatientService {
 
 	}
 
-	// ---------------------------------------UTILITY METHODS------------------------------------------------------//
+	// ---------------------------------------UTILITY
+	// METHODS------------------------------------------------------//
 	public java.time.LocalDate cassandraLdToJavaLd(com.datastax.driver.core.LocalDate ld) {
 		if (ld == null) {
 			return null;
@@ -87,11 +95,16 @@ public class PatientServiceImpl implements PatientService {
 	}
 
 	private LocalDate sqlToLocal(Date date) {
+		if (date ==null){
+			return null;
+		}
+		else {
 		return LocalDate.fromYearMonthDay(date.toLocalDate().getYear(), date.toLocalDate().getMonthValue(),
 				date.toLocalDate().getDayOfMonth());
-	}
+	}}
 
 	public void convertDateForAdding(PatientRequest patientRequest, Patient patient) {
+		
 		patient.setDateOfAdmission(sqlToLocal(patientRequest.getDateOfAdmission()));
 		patient.setDateOfBirth(sqlToLocal(patientRequest.getDateOfBirth()));
 		patient.setDateOfDeath(sqlToLocal(patientRequest.getDateOfDeath()));

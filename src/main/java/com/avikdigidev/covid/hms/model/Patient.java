@@ -1,7 +1,5 @@
 package com.avikdigidev.covid.hms.model;
 
-
-
 import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
 import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
@@ -69,7 +67,7 @@ public class Patient {
 	@Column(value = "dod")
 	private LocalDate dateOfDeath;
 
-	@PrimaryKeyColumn(name = "admittedon", ordinal = 1, type = PrimaryKeyType.CLUSTERED)
+	@Column(value = "admittedon")
 	private LocalDate dateOfAdmission;
 
 	@Column(value = "dischargedon")
@@ -86,7 +84,7 @@ public class Patient {
 	// list of selected outcomes -dropdown menu
 	@Column(value = "symptomstatus")
 	private String symptomStatus;
-	//list of selected outcomes -dropdown menu
+	// list of selected outcomes -dropdown menu
 	@Column(value = "actiontaken")
 	private String actionTaken;
 
@@ -95,25 +93,39 @@ public class Patient {
 	// list of selected outcomes -dropdown menu
 	@Column(value = "outcome")
 	private String outcome;
+	
+	@Column(value = "dateoffirsttest")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private LocalDate dateOfFirstTest;
+
+	@Column(value = "dateofsecondtest")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private LocalDate dateOfSecondTest;
+
+	@Column(value = "dateofthirdtest")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private LocalDate dateOfThirdTest;
 
 	@Column(value = "dateoffirstresult")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private LocalDate dateOfFirstTestResult;
-	// list of selected outcomes -dropdown menu
-	@Column(value = "firstresult")
-	private String firstResult;
 
 	@Column(value = "dateofsecondresult")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private LocalDate dateOfSecondTestResult;
-	
-	// list of selected outcomes -dropdown menu
-	@Column(value = "secondresult")
-	private String secondResult;
 
 	@Column(value = "dateofthirdresult")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private LocalDate dateOfThirdTestResult;
+	
+	// list of selected outcomes -dropdown menu
+	@Column(value = "firstresult")
+	private String firstResult;
+	
+	// list of selected outcomes -dropdown menu
+	@Column(value = "secondresult")
+	private String secondResult;
+	
 	// list of selected outcomes -dropdown menu
 	@Column(value = "thirdresult")
 	private String thirdResult;
@@ -121,6 +133,5 @@ public class Patient {
 	// additional comment
 	@Column(value = "comment")
 	private String comment;
-	
-	
+
 }

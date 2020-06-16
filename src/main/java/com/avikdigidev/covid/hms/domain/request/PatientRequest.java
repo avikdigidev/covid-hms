@@ -76,13 +76,13 @@ public class PatientRequest {
 	private Date dateOfDischarge;
 
 	@JsonProperty("travelhistory")
-	private Boolean travelHistory;
+	private String travelHistory;
 
 	@JsonProperty("contacthistory")
-	private Boolean contactHistory;
+	private String contactHistory;
 
 	@JsonProperty("comorbidity")
-	private Boolean coMorbidity;
+	private String coMorbidity;
 
 	// list of selected outcomes -dropdown menu
 	@JsonProperty("symptomstatus")

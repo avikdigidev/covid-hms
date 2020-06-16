@@ -31,6 +31,7 @@ public class PatientServiceImpl implements PatientService {
 	public PatientResponse getPatientById(String patientId) {
 		Patient patient = patientRepository.getPatientById(patientId);
 		PatientResponse patientResponse = new PatientResponse();
+
 		BeanUtils.copyProperties(patient, patientResponse);
 		convertDateForResponse(patient, patientResponse);
 		return patientResponse;
@@ -45,25 +46,29 @@ public class PatientServiceImpl implements PatientService {
 	public String createPatient(PatientRequest patientRequest) {
 		String patientId = String.valueOf(UUID.randomUUID());
 		Patient patient = new Patient();
+		stringToBooleanCoverter(patientRequest, patient);
 		BeanUtils.copyProperties(patientRequest, patient);
 
 		patient.setPatientId(patientId);
-	
+
 		Date date = new Date(System.currentTimeMillis());
 		patientRequest.setDateOfAdmission(date);
-		
+
 		convertDateForAdding(patientRequest, patient);
 		System.out.println(patient);
 		patientRepository.save(patient);
 		return "Patient Added Successfully with PaitentId: " + patientId;
 	}
 
+
+
 	public String updatePatient(PatientRequest patientRequest) {
 		String patientId = patientRequest.getPatientId();
 		Patient patientData = patientRepository.getPatientById(patientId);
 		if (patientData != null) {
+			stringToBooleanCoverter(patientRequest, patientData);
 			BeanUtils.copyProperties(patientRequest, patientData);
-			
+
 			convertDateForAdding(patientRequest, patientData);
 			patientRepository.save(patientData);
 			return "Patient Record Updated Successfully";
@@ -95,16 +100,16 @@ public class PatientServiceImpl implements PatientService {
 	}
 
 	private LocalDate sqlToLocal(Date date) {
-		if (date ==null){
+		if (date == null) {
 			return null;
+		} else {
+			return LocalDate.fromYearMonthDay(date.toLocalDate().getYear(), date.toLocalDate().getMonthValue(),
+					date.toLocalDate().getDayOfMonth());
 		}
-		else {
-		return LocalDate.fromYearMonthDay(date.toLocalDate().getYear(), date.toLocalDate().getMonthValue(),
-				date.toLocalDate().getDayOfMonth());
-	}}
+	}
 
 	public void convertDateForAdding(PatientRequest patientRequest, Patient patient) {
-		
+
 		patient.setDateOfAdmission(sqlToLocal(patientRequest.getDateOfAdmission()));
 		patient.setDateOfBirth(sqlToLocal(patientRequest.getDateOfBirth()));
 		patient.setDateOfDeath(sqlToLocal(patientRequest.getDateOfDeath()));
@@ -133,5 +138,32 @@ public class PatientServiceImpl implements PatientService {
 			patientResponseList.add(patientResponse);
 		}
 		return patientResponseList;
+	}
+	
+	private void stringToBooleanCoverter(PatientRequest patientRequest, Patient patient) {
+		if (patientRequest.getTravelHistory() == null) {
+			patient.setTravelHistory(null);
+		} else if (patientRequest.getTravelHistory().equals("Yes")) {
+			patient.setTravelHistory(true);
+		} else if (patientRequest.getTravelHistory().equals("No")) {
+			patient.setTravelHistory(false);
+		}
+
+		if (patientRequest.getContactHistory() == null) {
+			patient.setContactHistory(null);
+		} else if (patientRequest.getContactHistory().equals("Yes")) {
+			patient.setContactHistory(true);
+		} else if (patientRequest.getContactHistory().equals("No")) {
+			patient.setContactHistory(false);
+		}
+
+		if (patientRequest.getCoMorbidity() == null) {
+			patient.setCoMorbidity(null);
+		} else if (patientRequest.getCoMorbidity().equals("Yes")) {
+			patient.setCoMorbidity(true);
+		} else if (patientRequest.getCoMorbidity().equals("No")) {
+			patient.setCoMorbidity(false);
+		}
+
 	}
 }

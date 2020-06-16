@@ -1,4 +1,9 @@
-
+-added automatic increasing build number
+-removed admitted on as secondary key
+-added string to boolean conversions
+-added UI
+-added date of samples for 1st,2nd,3rd tests
+-updated the table
 -added entities, crud operations, db setup with script
 - Started working on junit
 -converted all the methods to post

@@ -3,6 +3,7 @@ package com.avikdigidev.covid.hms.domain.response;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -100,6 +101,18 @@ public class PatientResponse implements Serializable {
 	@JsonProperty("outcome")
 	private String outcome;
 
+	@JsonProperty("dateoffirsttest")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private LocalDate dateOfFirstTest;
+
+	@JsonProperty("dateofsecondtest")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private LocalDate dateOfSecondTest;
+
+	@JsonProperty("dateofthirdtest")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private LocalDate dateOfThirdTest;
+	
 	@JsonProperty("dateoffirstresult")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private LocalDate dateOfFirstTestResult;

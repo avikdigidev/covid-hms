@@ -36,7 +36,7 @@ public class PatientRequest {
 	private String sex;
 
 	@JsonProperty("covidactivestatus")
-	private Boolean covidActiveStatus;
+	private String covidActiveStatus;
 
 	@JsonProperty("mobilenumber")
 	private String mobile;

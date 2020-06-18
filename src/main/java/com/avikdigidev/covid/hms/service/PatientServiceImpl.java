@@ -66,9 +66,11 @@ public class PatientServiceImpl implements PatientService {
 		String patientId = patientRequest.getPatientId();
 		Patient patientData = patientRepository.getPatientById(patientId);
 		if (patientData != null) {
+			System.out.println(patientRequest);
 			stringToBooleanCoverter(patientRequest, patientData);
 			BeanUtils.copyProperties(patientRequest, patientData);
-
+			Date date = new Date(System.currentTimeMillis());
+			patientRequest.setDateOfAdmission(date);
 			convertDateForAdding(patientRequest, patientData);
 			patientRepository.save(patientData);
 			return "Patient Record Updated Successfully";
@@ -163,6 +165,14 @@ public class PatientServiceImpl implements PatientService {
 			patient.setCoMorbidity(true);
 		} else if (patientRequest.getCoMorbidity().equals("No")) {
 			patient.setCoMorbidity(false);
+		}
+		
+		if (patientRequest.getCovidActiveStatus() == null) {
+			patient.setCovidActiveStatus(null);
+		} else if (patientRequest.getCovidActiveStatus().equals("Suspected")) {
+			patient.setCovidActiveStatus(true);
+		} else if (patientRequest.getCovidActiveStatus().equals("NonSuspected")) {
+			patient.setCovidActiveStatus(false);
 		}
 
 	}

@@ -112,8 +112,19 @@ app.controller('getcontroller', function($scope, $http, $location) {
 		obj["patientid"] = $scope.patientId;
 		obj["admittedon"] = $scope.dateOfAdmission;
 		console.log(obj);
+		var regObj = {};
+		regObj = {
+			firstname : obj.firstname,
+			age : obj.age,
+			sex : obj.sex,
+			city : obj.village,
+			district : obj.Dist,
+			Address : obj.address,
+			mobilenumber : obj.Number
+		}
 
-		$http.post('/covid/updatePatient', obj).then(function(response) {
+		console.log(regObj);
+		$http.post('/covid/updatePatient', regObj).then(function(response) {
 
 			// This function handles success
 			alert("Updated Succesfully");

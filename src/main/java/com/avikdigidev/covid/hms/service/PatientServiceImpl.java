@@ -23,9 +23,10 @@ public class PatientServiceImpl implements PatientService {
 	@Autowired
 	PatientRepository patientRepository;
 
-	public List<Patient> getAllpatients() {
+	public List<PatientResponse> getAllpatients() {
 		List<Patient> patientList = patientRepository.getAllPatient();
-		return patientList;
+		
+		return createPatientResponseList(patientList);
 	}
 
 	public PatientResponse getPatientById(String patientId) {
@@ -116,6 +117,9 @@ public class PatientServiceImpl implements PatientService {
 		patient.setDateOfBirth(sqlToLocal(patientRequest.getDateOfBirth()));
 		patient.setDateOfDeath(sqlToLocal(patientRequest.getDateOfDeath()));
 		patient.setDateOfDischarge(sqlToLocal(patientRequest.getDateOfDischarge()));
+		patient.setDateOfFirstTest(sqlToLocal(patientRequest.getDateOfFirstTest()));
+		patient.setDateOfSecondTest(sqlToLocal(patientRequest.getDateOfSecondTest()));
+		patient.setDateOfThirdTest(sqlToLocal(patientRequest.getDateOfThirdTest()));
 		patient.setDateOfFirstTestResult(sqlToLocal(patientRequest.getDateOfFirstTestResult()));
 		patient.setDateOfSecondTestResult(sqlToLocal(patientRequest.getDateOfSecondTestResult()));
 		patient.setDateOfThirdTestResult(sqlToLocal(patientRequest.getDateOfThirdTestResult()));
@@ -126,6 +130,9 @@ public class PatientServiceImpl implements PatientService {
 		patientResponse.setDateOfBirth(cassandraLdToJavaLd(patient.getDateOfBirth()));
 		patientResponse.setDateOfDeath(cassandraLdToJavaLd(patient.getDateOfDeath()));
 		patientResponse.setDateOfDischarge(cassandraLdToJavaLd(patient.getDateOfDischarge()));
+		patientResponse.setDateOfFirstTest(cassandraLdToJavaLd(patient.getDateOfFirstTest()));
+		patientResponse.setDateOfSecondTest(cassandraLdToJavaLd(patient.getDateOfSecondTest()));
+		patientResponse.setDateOfThirdTest(cassandraLdToJavaLd(patient.getDateOfThirdTest()));
 		patientResponse.setDateOfFirstTestResult(cassandraLdToJavaLd(patient.getDateOfFirstTestResult()));
 		patientResponse.setDateOfSecondTestResult(cassandraLdToJavaLd(patient.getDateOfSecondTestResult()));
 		patientResponse.setDateOfThirdTestResult(cassandraLdToJavaLd(patient.getDateOfThirdTestResult()));

@@ -97,6 +97,19 @@ public class PatientRequest {
 	@JsonProperty("outcome")
 	private String outcome;
 
+	
+	@JsonProperty("dateoffirst")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private Date dateOfFirstTest;
+	
+	@JsonProperty("dateofsecondtest")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private Date dateOfSecondTest;
+	
+	@JsonProperty("dateofthirdtest")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private Date dateOfThirdTest;
+	
 	@JsonProperty("dateoffirstresult")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date dateOfFirstTestResult;

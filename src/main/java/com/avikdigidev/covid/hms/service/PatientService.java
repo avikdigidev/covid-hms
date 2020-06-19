@@ -12,7 +12,7 @@ import com.avikdigidev.covid.hms.model.Patient;
 
 @Service
 public interface PatientService {
-	public List<Patient> getAllpatients();
+	public List<PatientResponse> getAllpatients();
 
 	public PatientResponse getPatientById(String patientId);
 

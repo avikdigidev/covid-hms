@@ -1,3 +1,5 @@
+-updated UI and backend integration
+-seperated both modules while updating to handle null override of data
 -added automatic increasing build number
 -removed admitted on as secondary key
 -added string to boolean conversions

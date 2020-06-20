@@ -1,43 +1,7 @@
 Cassandra DB:
 create keyspace covid_hms with replication={'class':'SimpleStrategy', 'replication_factor':1};
 
-CREATE TABLE covid_hms.patientdetails (
-	patientid text,
-	admittedon date,
-	actiontaken text,
-	age int,
-	bedallotment text,
-	city text,
-	comment text,
-	comorbidity boolean,
-	contacthistory boolean,
-	country text,
-	covidactivestatus boolean,
-	dateoffirstresult date,
-	dateoffirsttest date,
-	dateofsecondresult date,
-	dateofsecondtest date,
-	dateofthirdresult date,
-	dateofthirdtest date,
-	dischargedon date,
-	district text,
-	dob date,
-	dod date,
-	firstname text,
-	firstresult text,
-	landmark text,
-	lastname text,
-	mobilenumber text,
-	outcome text,
-	pincode int,
-	secondresult text,
-	sex text,
-	state text,
-	symptomstatus text,
-	thirdresult text,
-	travelhistory boolean,
-	PRIMARY KEY (patientid)
-);
+CREATE TABLE covid_hms.patientdetails (patientid text,admittedon date,actiontaken text,age int,bedallotment text,city text,comment text,comorbidity boolean,contacthistory boolean,country text,covidactivestatus boolean,dateoffirstresult date,dateoffirsttest date,dateofsecondresult date,dateofsecondtest date,dateofthirdresult date,dateofthirdtest date,dischargedon date,district text,dob date,dod date,firstname text,firstresult text,landmark text,lastname text,mobilenumber text,outcome text,pincode int,secondresult text,sex text,state text,symptomstatus text,thirdresult text,travelhistory boolean,PRIMARY KEY (patientid));
 ===============================================================================================================
 
 

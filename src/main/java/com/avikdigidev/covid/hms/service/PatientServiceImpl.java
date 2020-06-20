@@ -49,14 +49,10 @@ public class PatientServiceImpl implements PatientService {
 		Patient patient = new Patient();
 		stringToBooleanCoverter(patientRequest, patient);
 		BeanUtils.copyProperties(patientRequest, patient);
-
 		patient.setPatientId(patientId);
-
 		Date date = new Date(System.currentTimeMillis());
 		patientRequest.setDateOfAdmission(date);
-
 		convertDateForAdding(patientRequest, patient);
-		System.out.println(patient);
 		patientRepository.save(patient);
 		return "Patient Added Successfully with PaitentId: " + patientId;
 	}
@@ -65,11 +61,6 @@ public class PatientServiceImpl implements PatientService {
 		String patientId = patientRequest.getPatientId();
 		Patient patientData = patientRepository.getPatientById(patientId);
 		if (patientData != null) {
-			System.out.println(patientRequest);
-			stringToBooleanCoverter(patientRequest, patientData);
-//			BeanUtils.copyProperties(patientRequest, patientData);
-//			Date date = new Date(System.currentTimeMillis());
-//			patientRequest.setDateOfAdmission(date);
 			patientData.setBedAllotment(patientRequest.getBedAllotment());
 			patientData.setOutcome(patientRequest.getOutcome());
 			patientData.setFirstResult(patientRequest.getFirstResult());
@@ -87,14 +78,10 @@ public class PatientServiceImpl implements PatientService {
 		String patientId = patientRequest.getPatientId();
 		Patient patientData = patientRepository.getPatientById(patientId);
 		if (patientData != null) {
-			System.out.println(patientRequest);
 			stringToBooleanCoverter(patientRequest, patientData);
 			patientData.setSymptomStatus(patientRequest.getSymptomStatus());
 			patientData.setActionTaken(patientRequest.getActionTaken());
-//			BeanUtils.copyProperties(patientRequest, patientData);
-//			Date date = new Date(System.currentTimeMillis());
-//			patientRequest.setDateOfAdmission(date);
-			convertDateForAdding(patientRequest, patientData);
+			patientData.setComment(patientRequest.getComment());
 			patientRepository.save(patientData);
 			return "Patient Clinic Record Updated Successfully";
 		} else {

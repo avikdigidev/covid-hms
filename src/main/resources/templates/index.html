@@ -180,7 +180,7 @@ body {
 	   <!--  <ul>
 	          <li ng-repeat="cust in response">{{cust.firstname + " " + cust.lastname}}</li>
 	      </ul> -->
-	      
+	      Enter Name to Filter:<input ng-model="searchtxt" type="text" placeholder="Flter key">
 	      <table class="table table-hover table-bordered" ng-hide="Clinical || inPatient">
 	      <thead>
 	      <tr>
@@ -194,10 +194,10 @@ body {
 	      </thead>
 	      <tbody>
 	      
-	      <tr ng-repeat="x in patientdata">
+	      <tr ng-repeat="x in patientdata | filter : searchtxt | startFrom:currentPage*pageSize | limitTo:pageSize  ">
 	      <td>{{$index +1}}</td>
-	      <td>{{x.firstName}}</td>
-	      <td>{{x.mobile}}</td>
+	      <td>{{x.firstname}}</td>
+	      <td>{{x.mobilenumber}}</td>
 	      <td><button class="btn btn-primary" ng-click="addClin(x)"> Clinical Details</button> <button class="btn btn-primary"ng-click="addInPat(x)"> In Patient</button></td>
 	      
 	      </tr>
@@ -205,7 +205,13 @@ body {
 	      </tbody>
 	      
 	      </table>
-	      
+	      <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+        Previous
+    </button>
+    {{currentPage+1}}/{{numberOfPages()}}
+    <button ng-disabled="currentPage >= patientdata.length/pageSize - 1" ng-click="currentPage=currentPage+1">
+        Next
+    </button> 
 	      
 	      <div ng-show="Clinical">
 	      <button class="btn btn-primary" ng-click="backToList()">Back To Patient List</button>

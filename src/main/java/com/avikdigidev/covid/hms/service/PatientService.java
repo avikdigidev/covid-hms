@@ -20,7 +20,9 @@ public interface PatientService {
 
 	public String createPatient(PatientRequest patientRequest);
 
-	public String updatePatient(PatientRequest patientRequest);
-
+	public String updateInPatient(PatientRequest patientRequest);
+	
+	public String updateInClinic(PatientRequest patientRequest);
+	
 	public String deletePatient(String patientId);
 }

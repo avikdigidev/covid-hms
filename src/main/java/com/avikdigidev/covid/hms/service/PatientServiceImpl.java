@@ -25,7 +25,7 @@ public class PatientServiceImpl implements PatientService {
 
 	public List<PatientResponse> getAllpatients() {
 		List<Patient> patientList = patientRepository.getAllPatient();
-		
+		//return patientList;
 		return createPatientResponseList(patientList);
 	}
 
@@ -63,7 +63,26 @@ public class PatientServiceImpl implements PatientService {
 
 
 
-	public String updatePatient(PatientRequest patientRequest) {
+	public String updateInPatient(PatientRequest patientRequest) {
+		String patientId = patientRequest.getPatientId();
+		Patient patientData = patientRepository.getPatientById(patientId);
+		if (patientData != null) {
+			System.out.println(patientRequest);
+			stringToBooleanCoverter(patientRequest, patientData);
+//			BeanUtils.copyProperties(patientRequest, patientData);
+//			Date date = new Date(System.currentTimeMillis());
+//			patientRequest.setDateOfAdmission(date);
+			patientData.setBedAllotment(patientRequest.getBedAllotment());
+			patientData.set
+			convertDateForAdding(patientRequest, patientData);
+			patientRepository.save(patientData);
+			return "In-Patient Record Updated Successfully";
+		} else {
+			return "In-Patient Record Not Updated or doesn't exist";
+		}
+	}
+	
+	public String updateInClinic(PatientRequest patientRequest) {
 		String patientId = patientRequest.getPatientId();
 		Patient patientData = patientRepository.getPatientById(patientId);
 		if (patientData != null) {
@@ -74,9 +93,9 @@ public class PatientServiceImpl implements PatientService {
 			patientRequest.setDateOfAdmission(date);
 			convertDateForAdding(patientRequest, patientData);
 			patientRepository.save(patientData);
-			return "Patient Record Updated Successfully";
+			return "Patient Clinic Record Updated Successfully";
 		} else {
-			return "Patient Record Not Updated or doesn't exist";
+			return "Patient Clinic Record Not Updated or doesn't exist";
 		}
 	}
 

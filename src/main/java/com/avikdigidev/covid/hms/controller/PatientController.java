@@ -52,10 +52,16 @@ public class PatientController {
 		return patientService.createPatient(patientRequest);
 	}
 
-	@PostMapping("/updatePatient")
-	public String updatePatient(@RequestBody PatientRequest patientRequest) {
+	@PostMapping("/updateInPatient")
+	public String updateInPatient(@RequestBody PatientRequest patientRequest) {
 		System.out.println(patientRequest);
-		return patientService.updatePatient(patientRequest);
+		return patientService.updateInPatient(patientRequest);
+	}
+	
+	@PostMapping("/updateInClinic")
+	public String updateInClinic(@RequestBody PatientRequest patientRequest) {
+		System.out.println(patientRequest);
+		return patientService.updateInClinic(patientRequest);
 	}
 
 	@PostMapping("/deletePatientById")

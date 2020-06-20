@@ -1,5 +1,6 @@
 var app = angular.module('app', [ 'ngRoute' ]);
 
+
 app.config([ '$locationProvider', function($locationProvider) {
 	$locationProvider.hashPrefix('');
 } ]);
@@ -29,7 +30,7 @@ app.config(function($routeProvider, $locationProvider) {
  */
 
 // var app2 = angular.module('app', []);
-app.controller('RegisTrationcontroller', function($scope, $http, $location) {
+app.controller('RegisTrationcontroller', function($scope, $http, $location,$timeout,$window,$filter) {
 	$scope.submitFunction = function(obj) {
 		console.log(obj);
 		var regObj = {};
@@ -48,9 +49,15 @@ app.controller('RegisTrationcontroller', function($scope, $http, $location) {
 		$http.post('/covid/addPatient', regObj).then(function(response) {
 
 			// This function handles success
-			alert("Added Successfully");
+	//		alert("Added Successfully");
 
 		});
+		$timeout( function(){
+			alert("Added Successfully");
+			
+			$window.location.reload();
+			}, 1500 		);
+		
 	}
 	$scope.RegPage = true;
 	$scope.patientDiv = false;
@@ -63,8 +70,11 @@ app.controller('RegisTrationcontroller', function($scope, $http, $location) {
 	$scope.patientListDiv = function() {
 		$scope.patientDiv = true;
 		$scope.RegPage = false;
-
+	//	$scope.getfunction();
+		
 	}
+	
+	
 
 });
 
@@ -75,8 +85,20 @@ app.controller('RegisTrationcontroller', function($scope, $http, $location) {
  * 
  * $location.path('/'); } }
  */
-app.controller('getcontroller', function($scope, $http, $location) {
+app.controller('getcontroller', function($scope, $http, $location,$window,$filter) {
 
+	//$scope.$watch('$scope.patientDiv', $scope.getfunction);
+	$scope.$watch('searchtxt', function(newValue,oldValue){ 
+		if(oldValue!=newValue){
+        $scope.currentPage = 0;
+      }
+    },true);
+	  $scope.currentPage = 0;
+	    $scope.pageSize = 10;
+	    $scope.patientdata=[];
+	    $scope.numberOfPages=function(){
+	        return Math.ceil($scope.patientdata.length/$scope.pageSize);                
+	    }
 	$scope.getfunction = function() {
 		$http({
 			method : 'GET',
@@ -85,9 +107,13 @@ app.controller('getcontroller', function($scope, $http, $location) {
 
 			console.log(response);
 			$scope.patientdata = response.data;
+			console.log($scope.patientdata);
 			$scope.backToList();
 			// this callback will be called asynchronously
 			// when the response is available
+			
+		//	$apply();
+			
 		}, function errorCallback(response) {
 			// called asynchronously if an error occurs
 			// or server returns response with an error status.
@@ -101,9 +127,9 @@ app.controller('getcontroller', function($scope, $http, $location) {
 	};
 
 	$scope.addClin = function(patient) {
-		$scope.dateOfAdmission = patient.dateOfAdmission;
-		$scope.editPatient = patient.firstName;
-		$scope.patientId = patient.patientId;
+		$scope.dateOfAdmission = patient.admittedon;
+		$scope.editPatient = patient.firstname;
+		$scope.patientId = patient.patientid;
 		$scope.Clinical = true;
 		$scope.inPatient = false;
 
@@ -114,13 +140,15 @@ app.controller('getcontroller', function($scope, $http, $location) {
 		console.log(obj);
 		var regObj = {};
 		regObj = {
-			firstname : obj.firstname,
-			age : obj.age,
-			sex : obj.sex,
-			city : obj.village,
-			district : obj.Dist,
-			Address : obj.address,
-			mobilenumber : obj.Number
+				admittedon : obj.admittedon,
+				actiontaken : obj.actiontaken,
+				comment : obj.comment,
+				comorbidity : obj.comorbidity,
+				contacthistory : obj.contacthistory,
+				patientid : obj.patientid,
+				symptomstatus : obj.symptomstatus,
+				travelhistory : obj.travelhistory
+
 		}
 
 		console.log(regObj);
@@ -136,7 +164,26 @@ app.controller('getcontroller', function($scope, $http, $location) {
 		obj["patientid"] = $scope.patientId;
 		obj["admittedon"] = $scope.dateOfAdmission;
 		console.log(obj);
-		$http.post('/covid/updatePatient', obj).then(function(response) {
+		
+		var regObj = {};
+		regObj = {
+				SamplecollectionDate1 : obj.SamplecollectionDate1,
+				SamplecollectionDate2 : obj.SamplecollectionDate2,
+				SamplecollectionDate3 : obj.SamplecollectionDate3,
+				admittedon : obj.admittedon,
+				dateoffirstresult : obj.dateoffirstresult,
+				dateofsecondresult : obj.dateofsecondresult,
+				dateofthirdresult : obj.dateofthirdresult,
+				firstresult : obj.firstresult,
+				outcome : obj.outcome,
+				patientid : obj.patientid,
+				secondresult : obj.secondresult,
+				thirdresult : obj.thirdresult
+
+		}
+
+		console.log(regObj);
+		$http.post('/covid/updatePatient', regObj).then(function(response) {
 
 			// This function handles success
 			alert("Updated Succesfully");
@@ -146,11 +193,19 @@ app.controller('getcontroller', function($scope, $http, $location) {
 	}
 
 	$scope.addInPat = function(patient) {
-		$scope.dateOfAdmission = patient.dateOfAdmission;
-		$scope.editPatient = patient.firstName;
-		console.log(patient)
-		$scope.patientId = patient.patientId;
+		$scope.dateOfAdmission = patient.admittedon;
+		$scope.editPatient = patient.firstname;
+		$scope.patientId = patient.patientid;
 		$scope.Clinical = false;
 		$scope.inPatient = true;
 	}
+});
+
+
+
+app.filter('startFrom', function() {
+    return function(input, start) {
+        start = +start; //parse to int
+        return input.slice(start);
+    }
 });

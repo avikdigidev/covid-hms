@@ -152,7 +152,7 @@ app.controller('getcontroller', function($scope, $http, $location,$window,$filte
 		}
 
 		console.log(regObj);
-		$http.post('/covid/updatePatient', regObj).then(function(response) {
+		$http.post('/covid/updateInClinic', regObj).then(function(response) {
 
 			// This function handles success
 			alert("Updated Succesfully");
@@ -183,7 +183,7 @@ app.controller('getcontroller', function($scope, $http, $location,$window,$filte
 		}
 
 		console.log(regObj);
-		$http.post('/covid/updatePatient', regObj).then(function(response) {
+		$http.post('/covid/updateInPatient', regObj).then(function(response) {
 
 			// This function handles success
 			alert("Updated Succesfully");

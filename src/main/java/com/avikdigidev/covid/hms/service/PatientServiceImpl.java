@@ -25,7 +25,7 @@ public class PatientServiceImpl implements PatientService {
 
 	public List<PatientResponse> getAllpatients() {
 		List<Patient> patientList = patientRepository.getAllPatient();
-		//return patientList;
+		// return patientList;
 		return createPatientResponseList(patientList);
 	}
 
@@ -49,31 +49,23 @@ public class PatientServiceImpl implements PatientService {
 		Patient patient = new Patient();
 		stringToBooleanCoverter(patientRequest, patient);
 		BeanUtils.copyProperties(patientRequest, patient);
-
 		patient.setPatientId(patientId);
-
 		Date date = new Date(System.currentTimeMillis());
 		patientRequest.setDateOfAdmission(date);
-
 		convertDateForAdding(patientRequest, patient);
-		System.out.println(patient);
 		patientRepository.save(patient);
 		return "Patient Added Successfully with PaitentId: " + patientId;
 	}
-
-
 
 	public String updateInPatient(PatientRequest patientRequest) {
 		String patientId = patientRequest.getPatientId();
 		Patient patientData = patientRepository.getPatientById(patientId);
 		if (patientData != null) {
-			System.out.println(patientRequest);
-			stringToBooleanCoverter(patientRequest, patientData);
-//			BeanUtils.copyProperties(patientRequest, patientData);
-//			Date date = new Date(System.currentTimeMillis());
-//			patientRequest.setDateOfAdmission(date);
 			patientData.setBedAllotment(patientRequest.getBedAllotment());
-			patientData.set
+			patientData.setOutcome(patientRequest.getOutcome());
+			patientData.setFirstResult(patientRequest.getFirstResult());
+			patientData.setSecondResult(patientRequest.getSecondResult());
+			patientData.setThirdResult(patientRequest.getThirdResult());
 			convertDateForAdding(patientRequest, patientData);
 			patientRepository.save(patientData);
 			return "In-Patient Record Updated Successfully";
@@ -81,17 +73,15 @@ public class PatientServiceImpl implements PatientService {
 			return "In-Patient Record Not Updated or doesn't exist";
 		}
 	}
-	
+
 	public String updateInClinic(PatientRequest patientRequest) {
 		String patientId = patientRequest.getPatientId();
 		Patient patientData = patientRepository.getPatientById(patientId);
 		if (patientData != null) {
-			System.out.println(patientRequest);
 			stringToBooleanCoverter(patientRequest, patientData);
-			BeanUtils.copyProperties(patientRequest, patientData);
-			Date date = new Date(System.currentTimeMillis());
-			patientRequest.setDateOfAdmission(date);
-			convertDateForAdding(patientRequest, patientData);
+			patientData.setSymptomStatus(patientRequest.getSymptomStatus());
+			patientData.setActionTaken(patientRequest.getActionTaken());
+			patientData.setComment(patientRequest.getComment());
 			patientRepository.save(patientData);
 			return "Patient Clinic Record Updated Successfully";
 		} else {
@@ -167,7 +157,7 @@ public class PatientServiceImpl implements PatientService {
 		}
 		return patientResponseList;
 	}
-	
+
 	private void stringToBooleanCoverter(PatientRequest patientRequest, Patient patient) {
 		if (patientRequest.getTravelHistory() == null) {
 			patient.setTravelHistory(null);
@@ -192,7 +182,7 @@ public class PatientServiceImpl implements PatientService {
 		} else if (patientRequest.getCoMorbidity().equals("No")) {
 			patient.setCoMorbidity(false);
 		}
-		
+
 		if (patientRequest.getCovidActiveStatus() == null) {
 			patient.setCovidActiveStatus(null);
 		} else if (patientRequest.getCovidActiveStatus().equals("Suspected")) {

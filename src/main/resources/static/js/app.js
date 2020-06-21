@@ -145,6 +145,7 @@ app.controller('getcontroller', function($scope, $http, $location,$window,$filte
 				comment : obj.comment,
 				comorbidity : obj.comorbidity,
 				contacthistory : obj.contacthistory,
+				covidactivestatus: obj.covidactivestatus,
 				patientid : obj.patientid,
 				symptomstatus : obj.symptomstatus,
 				travelhistory : obj.travelhistory
@@ -157,6 +158,11 @@ app.controller('getcontroller', function($scope, $http, $location,$window,$filte
 			// This function handles success
 			alert("Updated Succesfully");
 		});
+		$timeout( function(){
+			alert("Updated Successfully");
+			
+		//	$window.location.reload();
+			}, 1500 		);
 
 	}
 
@@ -167,9 +173,9 @@ app.controller('getcontroller', function($scope, $http, $location,$window,$filte
 		
 		var regObj = {};
 		regObj = {
-				SamplecollectionDate1 : obj.SamplecollectionDate1,
-				SamplecollectionDate2 : obj.SamplecollectionDate2,
-				SamplecollectionDate3 : obj.SamplecollectionDate3,
+				dateoffirst : obj.SamplecollectionDate1,
+				dateofsecondtest : obj.SamplecollectionDate2,
+				dateofthirdtest : obj.SamplecollectionDate3,
 				admittedon : obj.admittedon,
 				dateoffirstresult : obj.dateoffirstresult,
 				dateofsecondresult : obj.dateofsecondresult,
@@ -189,7 +195,19 @@ app.controller('getcontroller', function($scope, $http, $location,$window,$filte
 			alert("Updated Succesfully");
 
 		});
+		$timeout( function(){
+			alert("Updated Successfully");
+			
+		//	$window.location.reload();
+			}, 1500 		);
 
+	}
+	
+	$scope.openModal=function(details){
+		console.log(details);
+		$scope.patientFullDetails=details;
+		$('#myModal').modal('show');
+		
 	}
 
 	$scope.addInPat = function(patient) {

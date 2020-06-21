@@ -78,6 +78,12 @@ body {
     <title>Hospital Registration</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+         <script type="text/javascript" src="externalJs/jquery.min.js"></script>
+    
+    <!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+ <!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+ <!--  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
     <script type="text/javascript" src="externalJs/angular.min.js"></script>
      <script type="text/javascript" src="externalJs/angular-resource.min.js"></script>
     <script type="text/javascript" src="externalJs/angular-route.min.js"></script>
@@ -87,6 +93,7 @@ body {
     
     
     <script type="text/javascript" src="externalJs/bootstrap.min.js"></script>
+    
     <script type="text/javascript" src="js/controller.js"></script>
      <script type="text/javascript" src="js/app.js"></script>
     <link  href="css/bootstrap.css" type="text/css" rel="stylesheet"/>
@@ -181,6 +188,107 @@ body {
 	          <li ng-repeat="cust in response">{{cust.firstname + " " + cust.lastname}}</li>
 	      </ul> -->
 	      Enter Name to Filter:<input ng-model="searchtxt" type="text" placeholder="Flter key">
+	      
+	      
+	      
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Patient Details</h4>
+      </div>
+       <table class="table table-hover table-bordered">
+	      
+	      <tbody>
+	    <tr> <td> <b>Patient Basic Details</b></td></tr>
+	      <tr style="font-size: 13px;">
+	      <td>{{patientFullDetails.patientid}}</td>
+	      <td>{{patientFullDetails.firstname}} </td>
+	     
+	      </tr>
+	        <tr style="font-size: 13px;">
+	      <td>{{patientFullDetails.age}}</td>
+	      <td>{{patientFullDetails.sex}} </td>
+	     
+	      </tr>
+	        <tr style="font-size: 13px;">
+	      <td>{{patientFullDetails.city}}</td>
+	      <td>{{patientFullDetails.district}} </td>
+	     
+	      </tr>
+	        <tr style="font-size: 13px;">
+	      <td>{{patientFullDetails.mobilenumber}}</td>
+	      <!-- <td>{{patientFullDetails.firstname}} </a></td> -->
+	     
+	      </tr>
+	      
+	      <tr>  <td><b>Clinical Details:</b></td></tr>
+	        <tr style="font-size: 13px;">
+	      <td>{{patientFullDetails.contacthistory}}</td>
+	      <td>{{patientFullDetails.travelhistory}} </a></td>
+	     
+	      </tr>
+	        <tr style="font-size: 13px;">
+	      <td>{{patientFullDetails.covidactivestatus}}</td>
+	      <td>{{patientFullDetails.comorbidity}} </td>
+	     
+	      </tr>
+	        <tr style="font-size: 13px;">
+	      <td>{{patientFullDetails.symptomstatus}}</td>
+	      <td>{{patientFullDetails.actiontaken}} </td>
+	     
+	      </tr>
+	      
+	    <tr>   <td> <b>In Patient Details:</b></td></tr>
+	        <tr style="font-size: 13px;">
+	      <td>{{patientFullDetails.bedallotment}}</td>
+	      <td>{{patientFullDetails.outcome}} </td>
+	     
+	      </tr>
+	        <tr style="font-size: 13px;">
+	      <td>{{patientFullDetails.dateoffirsttest}}</td>
+	      <td>{{patientFullDetails.dateoffirstresult}}</td>
+	     
+	      </tr>
+	        <tr style="font-size: 13px;">
+	      <td>{{patientFullDetails.dateofsecondtest}}</td>
+	      <td>{{patientFullDetails.dateofsecondresult}} </a></td>
+	     
+	      </tr>
+	        <tr style="font-size: 13px;">
+	      <td>{{patientFullDetails.dateofthirdtest}}</td>
+	      <td>{{patientFullDetails.dateofthirdresult}} </td>
+	     
+	      </tr>
+	        <tr style="font-size: 13px;">
+	      <td>{{patientFullDetails.id}}</td>
+	      <td>{{patientFullDetails.firstname}} </td>
+	      <td>{{patientFullDetails.id}}</td>
+	      
+	     
+	      </tr>
+	        <tr style="font-size: 13px;">
+	      <td>{{patientFullDetails.id}}</td>
+	      
+	     
+	      </tr>
+	       
+	      
+	      </tbody>
+	      
+	      </table>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 	      <table class="table table-hover table-bordered" ng-hide="Clinical || inPatient">
 	      <thead>
 	      <tr>
@@ -194,11 +302,11 @@ body {
 	      </thead>
 	      <tbody>
 	      
-	      <tr ng-repeat="x in patientdata | filter : searchtxt | startFrom:currentPage*pageSize | limitTo:pageSize  ">
+	      <tr ng-repeat="x in patientdata | filter : searchtxt | startFrom:currentPage*pageSize | limitTo:pageSize  " style="font-size: 13px;">
 	      <td>{{$index +1}}</td>
-	      <td>{{x.firstname}}</td>
+	      <td><a  ng-click="openModal(x)">{{x.firstname}} </a></td>
 	      <td>{{x.mobilenumber}}</td>
-	      <td><button class="btn btn-primary" ng-click="addClin(x)"> Clinical Details</button> <button class="btn btn-primary"ng-click="addInPat(x)"> In Patient</button></td>
+	      <td><button class="btn btn-primary" ng-click="addClin(x)">Update/Add Clinical Details</button> <button class="btn btn-primary"ng-click="addInPat(x)">Update/Add In Patient</button></td>
 	      
 	      </tr>
 	      
@@ -257,9 +365,9 @@ body {
   <input type="radio" id="ak" name="ActionT" value="AIK" ng-model="y.actiontaken">
   <label for="ak">Admission in KTS (DCH)</label><br>
     <input type="radio" id="iqid" name="ActionT" value="IQ" ng-model="y.actiontaken">
-  <label for="iqid">Instituitional Quarantine</label><br>
+  <label for="iqid">Institutional Quarantine</label><br>
   <input type="radio" id="cm" name="ActionT" value="RTNCM" ng-model="y.actiontaken">
-  <label for=""cm"">Refer to Non COVID Mangagement</label><br>
+  <label for="cm">Refer to Non COVID Management</label><br>
     </div>
   <div class="column col-sm-5">
   
@@ -298,7 +406,7 @@ body {
       <div class="form-group">
         <label class="control-label col-sm-2" >Bed Alloted:  Ward No:</label>
         <div class="col-sm-2">
-          <input type="number" class="form-control" 
+          <input type="text" class="form-control" 
             placeholder="Enter ward" ng-model="z.bedallotment"/>
         </div>
       </div>

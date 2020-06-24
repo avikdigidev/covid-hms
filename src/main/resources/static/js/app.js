@@ -70,10 +70,31 @@ app.controller('RegisTrationcontroller', function($scope, $http, $location,$time
 	$scope.patientListDiv = function() {
 		$scope.patientDiv = true;
 		$scope.RegPage = false;
-	//	$scope.getfunction();
+		$scope.getfunction();
 		
 	}
-	
+	$scope.getfunction = function() {
+		$http({
+			method : 'GET',
+			url : '/covid/patients'
+		}).then(function successCallback(response) {
+
+			console.log(response);
+			$scope.patientdata = response.data;
+			console.log($scope.patientdata);
+
+			$scope.Clinical = false;
+			$scope.inPatient = false;
+			// this callback will be called asynchronously
+			// when the response is available
+			
+		//	$apply();
+			
+		}, function errorCallback(response) {
+			// called asynchronously if an error occurs
+			// or server returns response with an error status.
+		});
+	}
 	
 
 });

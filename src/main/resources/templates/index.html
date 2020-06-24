@@ -1,271 +1,307 @@
 <style>
-* {box-sizing: border-box;}
+* {
+	box-sizing: border-box;
+}
 
 body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
+	margin: 0;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 .topnav {
-  overflow: hidden;
-  background-color: #e9e9e9;
+	overflow: hidden;
+	background-color: #e9e9e9;
 }
 
 .topnav a {
-  float: left;
-  display: block;
-  color: black;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
+	float: left;
+	display: block;
+	color: black;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 17px;
 }
 
 .topnav a:hover {
-  background-color: #ddd;
-  color: black;
+	background-color: #ddd;
+	color: black;
 }
 
 .topnav a.active {
-  background-color: #2196F3;
-  color: white;
+	background-color: #2196F3;
+	color: white;
 }
 
 .topnav .search-container {
-  float: right;
+	float: right;
 }
 
 .topnav input[type=text] {
-  padding: 6px;
-  margin-top: 8px;
-  font-size: 17px;
-  border: none;
+	padding: 6px;
+	margin-top: 8px;
+	font-size: 17px;
+	border: none;
 }
 
 .topnav .search-container button {
-  float: right;
-  padding: 6px;
-  margin-top: 8px;
-  margin-right: 16px;
-  background: #ddd;
-  font-size: 17px;
-  border: none;
-  cursor: pointer;
+	float: right;
+	padding: 6px;
+	margin-top: 8px;
+	margin-right: 16px;
+	background: #ddd;
+	font-size: 17px;
+	border: none;
+	cursor: pointer;
 }
 
 .topnav .search-container button:hover {
-  background: #ccc;
+	background: #ccc;
 }
 
 @media screen and (max-width: 600px) {
-  .topnav .search-container {
-    float: none;
-  }
-  .topnav a, .topnav input[type=text], .topnav .search-container button {
-    float: none;
-    display: block;
-    text-align: left;
-    width: 100%;
-    margin: 0;
-    padding: 14px;
-  }
-  .topnav input[type=text] {
-    border: 1px solid #ccc;  
-  }
+	.topnav .search-container {
+		float: none;
+	}
+	.topnav a, .topnav input[type=text], .topnav .search-container button {
+		float: none;
+		display: block;
+		text-align: left;
+		width: 100%;
+		margin: 0;
+		padding: 14px;
+	}
+	.topnav input[type=text] {
+		border: 1px solid #ccc;
+	}
 }
-</style><html>
+</style>
+<html>
 <head>
-    <title>Hospital Registration</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    
-         <script type="text/javascript" src="externalJs/jquery.min.js"></script>
-    
-    <!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
- <!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
- <!--  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
-    <script type="text/javascript" src="externalJs/angular.min.js"></script>
-     <script type="text/javascript" src="externalJs/angular-resource.min.js"></script>
-    <script type="text/javascript" src="externalJs/angular-route.min.js"></script>
-    
-    
-  
-    
-    
-    <script type="text/javascript" src="externalJs/bootstrap.min.js"></script>
-    
-    <script type="text/javascript" src="js/controller.js"></script>
-     <script type="text/javascript" src="js/app.js"></script>
-    <link  href="css/bootstrap.css" type="text/css" rel="stylesheet"/>
-    <base href="/">
+<title>Hospital Registration</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<script type="text/javascript" src="externalJs/jquery.min.js"></script>
+
+<!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+<!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+<!--  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+<script type="text/javascript" src="externalJs/angular.min.js"></script>
+<script type="text/javascript" src="externalJs/angular-resource.min.js"></script>
+<script type="text/javascript" src="externalJs/angular-route.min.js"></script>
+
+
+
+
+
+<script type="text/javascript" src="externalJs/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="js/controller.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+<link href="css/bootstrap.css" type="text/css" rel="stylesheet" />
+<base href="/">
 </head>
-<body>
- 
-<div class="container" ng-app="app">
+<body style="background-color: aliceblue;">
+
+	<div class="container" ng-app="app">
 
 
 
 
 
 
- 
-  
-  <div ng-controller="RegisTrationcontroller">
-  
-  
-  
-  <div class="topnav">
-  <a class="active" ng-click="RegDiv()">Registration</a>
-  <a ng-click="patientListDiv()">Patient List</a>
- 
-  
-
-</div>
 
 
-    <form class="form-horizontal" name="PatientForm" ng-show="RegPage" >
-      <div class="form-group">
-        <label class="control-label col-sm-2" >Name:</label>
-        <div class="col-sm-5">
-          <input type="text" class="form-control" 
-            placeholder="Enter Name" ng-model="x.firstname"/>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="control-label col-sm-2" >Age:</label>
-        <div class="col-sm-1">
-          <input type="number" class="form-control" 
-            placeholder="Age" ng-model="x.age"/>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="control-label col-sm-2" >sex:</label>
-        <div class="col-sm-1">
-          <input type="radio" id="male" name="gender" value="male" ng-model="x.sex">
-  <label for="male">Male</label><br>
-  <input type="radio" id="female" name="gender" value="female" ng-model="x.sex">
-  <label for="female">Female</label><br>
-  <input type="radio" id="other" name="gender" value="other" ng-model="x.sex">
-  <label for="other">Other</label>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="control-label col-sm-2" >Address:</label>
-        <div class="col-sm-5">
-          <input type="text" class="form-control"
-            placeholder="Enter Address" ng-model="x.address"/>
-        </div>
-      </div>.  <div class="form-group">
-        <label class="control-label col-sm-2" >Village:</label>
-        <div class="col-sm-5">
-          <input type="text" class="form-control" 
-            placeholder="Village" ng-model="x.village"/>
-        </div>
-      </div>
-        <div class="form-group">
-        <label class="control-label col-sm-2" >Dist:</label>
-        <div class="col-sm-5">
-          <input type="text" class="form-control" 
-            placeholder="District" ng-model="x.Dist"/>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="control-label col-sm-2" >Mobile No:</label>
-        <div class="col-sm-5">
-          <input type="number" class="form-control" 
-            placeholder="Number" ng-model="x.Number"/>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-          <button type="submit" class="btn btn-success" ng-click="submitFunction(x)">Submit</button>
-        </div>
-      </div>
-    </form>
-  <div class="col-sm-12" ng-controller="getcontroller" ng-show="patientDiv">
-   <!--  <button id="btn-id" type="button" class="btn btn-primary" ng-click="getfunction()">Get All Patient</button> -->
-	   <!--  <ul>
+		<div ng-controller="RegisTrationcontroller" style="background: white;border: 1px solid;">
+
+
+
+			<div class="topnav">
+				<a class="active" ng-click="RegDiv()">Registration</a> <a
+					ng-click="patientListDiv()">Patient List</a>
+
+
+
+			</div>
+
+
+			<form class="form-horizontal" name="PatientForm"
+				style="padding-top: 15px;" ng-show="RegPage">
+				<div class="form-group">
+					<label class="control-label col-sm-2">Name:</label>
+					<div class="col-sm-5">
+						<input type="text" class="form-control" placeholder="Enter Name"
+							ng-model="x.firstname" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2">Age:</label>
+					<div class="col-sm-1">
+						<input type="number" class="form-control" placeholder="Age"
+							ng-model="x.age" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2">sex:</label>
+					<div class="col-sm-1">
+						<input type="radio" id="male" name="gender" value="male"
+							ng-model="x.sex"> <label for="male">Male</label><br>
+						<input type="radio" id="female" name="gender" value="female"
+							ng-model="x.sex"> <label for="female">Female</label><br>
+						<input type="radio" id="other" name="gender" value="other"
+							ng-model="x.sex"> <label for="other">Other</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2">Address:</label>
+					<div class="col-sm-5">
+						<input type="text" class="form-control"
+							placeholder="Enter Address" ng-model="x.address" />
+					</div>
+				</div>
+				.
+				<div class="form-group">
+					<label class="control-label col-sm-2">Village:</label>
+					<div class="col-sm-5">
+						<input type="text" class="form-control" placeholder="Village"
+							ng-model="x.village" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2">Dist:</label>
+					<div class="col-sm-5">
+						<input type="text" class="form-control" placeholder="District"
+							ng-model="x.Dist" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2">Mobile No:</label>
+					<div class="col-sm-5">
+						<input type="number" class="form-control" placeholder="Number"
+							ng-model="x.Number" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-success"
+							ng-click="submitFunction(x)">Submit</button>
+					</div>
+				</div>
+			</form>
+			<div class="col-sm-12" ng-controller="getcontroller"
+				ng-show="patientDiv" style="background: white;border: 1px solid;">
+				<!--  <button id="btn-id" type="button" class="btn btn-primary" ng-click="getfunction()">Get All Patient</button> -->
+				<!--  <ul>
 	          <li ng-repeat="cust in response">{{cust.firstname + " " + cust.lastname}}</li>
 	      </ul> -->
-	      Enter Name to Filter:<input ng-model="searchtxt" type="text" placeholder="Flter key">
-	      
-	      
-	      
+				<div style="padding-top: 15px;" ng-hide="Clinical || inPatient">
+					Enter Name to Filter:<input ng-model="searchtxt" type="text"
+						placeholder="Enter">
+				</div>
 
-<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+				<br>
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Patient Details</h4>
-      </div>
-       <table class="table table-hover table-bordered">
-	      
-	      <tbody>
-	    <tr> <td> <b>Patient Basic Details</b></td></tr>
-	      <tr style="font-size: 13px;">
-	      <td>{{patientFullDetails.patientid}}</td>
-	      <td>{{patientFullDetails.firstname}} </td>
-	     
-	      </tr>
-	        <tr style="font-size: 13px;">
-	      <td>{{patientFullDetails.age}}</td>
-	      <td>{{patientFullDetails.sex}} </td>
-	     
-	      </tr>
-	        <tr style="font-size: 13px;">
-	      <td>{{patientFullDetails.city}}</td>
-	      <td>{{patientFullDetails.district}} </td>
-	     
-	      </tr>
-	        <tr style="font-size: 13px;">
-	      <td>{{patientFullDetails.mobilenumber}}</td>
-	      <!-- <td>{{patientFullDetails.firstname}} </a></td> -->
-	     
-	      </tr>
-	      
-	      <tr>  <td><b>Clinical Details:</b></td></tr>
-	        <tr style="font-size: 13px;">
-	      <td>{{patientFullDetails.contacthistory}}</td>
-	      <td>{{patientFullDetails.travelhistory}} </a></td>
-	     
-	      </tr>
-	        <tr style="font-size: 13px;">
-	      <td>{{patientFullDetails.covidactivestatus}}</td>
-	      <td>{{patientFullDetails.comorbidity}} </td>
-	     
-	      </tr>
-	        <tr style="font-size: 13px;">
-	      <td>{{patientFullDetails.symptomstatus}}</td>
-	      <td>{{patientFullDetails.actiontaken}} </td>
-	     
-	      </tr>
-	      
-	    <tr>   <td> <b>In Patient Details:</b></td></tr>
-	        <tr style="font-size: 13px;">
-	      <td>{{patientFullDetails.bedallotment}}</td>
-	      <td>{{patientFullDetails.outcome}} </td>
-	     
-	      </tr>
-	        <tr style="font-size: 13px;">
-	      <td>{{patientFullDetails.dateoffirsttest}}</td>
-	      <td>{{patientFullDetails.dateoffirstresult}}</td>
-	     
-	      </tr>
-	        <tr style="font-size: 13px;">
-	      <td>{{patientFullDetails.dateofsecondtest}}</td>
-	      <td>{{patientFullDetails.dateofsecondresult}} </a></td>
-	     
-	      </tr>
-	        <tr style="font-size: 13px;">
-	      <td>{{patientFullDetails.dateofthirdtest}}</td>
-	      <td>{{patientFullDetails.dateofthirdresult}} </td>
-	     
-	      </tr>
-	        <tr style="font-size: 13px;">
+				<!-- Modal -->
+				<div id="myModal" class="modal fade" role="dialog">
+					<div class="modal-dialog">
+
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header" style="background-color: azure;">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Patient Details</h4>
+							</div>
+							<table class="table table-hover table-bordered">
+
+								<tbody>
+									<tr>
+										<td style="background-color: aqua;"><b>Patient Basic
+												Details</b></td>
+									</tr>
+									<tr style="font-size: 13px;">
+										<td><b>Patient Id :</b>{{patientFullDetails.patientid}}</td>
+										<td><b> Name :</b>{{patientFullDetails.firstname}}</td>
+
+									</tr>
+									<tr style="font-size: 13px;">
+										<td><b> Age :</b>{{patientFullDetails.age}}</td>
+										<td><b> Sex :</b>{{patientFullDetails.sex}}</td>
+
+									</tr>
+									<tr style="font-size: 13px;">
+										<td><b>City :</b>{{patientFullDetails.city}}</td>
+										<td><b>District:</b>{{patientFullDetails.district}}</td>
+
+									</tr>
+									<tr style="font-size: 13px;">
+										<td><b>Mobile No :</b>{{patientFullDetails.mobilenumber}}</td>
+										<!-- <td>{{patientFullDetails.firstname}} </a></td> -->
+
+									</tr>
+
+									<tr>
+										<td style="background-color: aqua;"><b>Clinical
+												Details:</b></td>
+									</tr>
+									<tr style="font-size: 13px;">
+										<td><b>Contact History:</b>{{patientFullDetails.contacthistory}}</td>
+										<td><b>Travel History:</b>{{patientFullDetails.travelhistory}}
+											</a></td>
+
+									</tr>
+									<tr style="font-size: 13px;">
+										<td><b>Covid Status:</b>{{patientFullDetails.covidactivestatus}}</td>
+										<td><b> Comorbidity:</b>{{patientFullDetails.comorbidity}}
+										</td>
+
+									</tr>
+									<tr style="font-size: 13px;">
+										<td><b> Symptom Status:</b>{{patientFullDetails.symptomstatus}}</td>
+										<td><b> Action :</b>{{patientFullDetails.actiontaken}}</td>
+
+									</tr>
+
+									<tr>
+										<td style="background-color: aqua;"><b>In Patient
+												Details:</b></td>
+									</tr>
+									<tr style="font-size: 13px;">
+										<td><b>Bed :</b>{{patientFullDetails.bedallotment}}</td>
+										<td><b>OutCome :</b>{{patientFullDetails.outcome}}</td>
+
+									</tr>
+									<tr style="font-size: 13px;">
+										<td><b> Date of First test :</b>{{patientFullDetails.dateoffirsttest}}</td>
+
+										<td><b> Date Of First result :</b>{{patientFullDetails.dateoffirstresult}}</td>
+
+									</tr>
+									<tr style="font-size: 13px;">
+										<td><b>First Result :</b>{{patientFullDetails.firstresult}}</td>
+									</tr>
+									<tr style="font-size: 13px;">
+										<td><b> Date of Second test :</b>
+											{{patientFullDetails.dateofsecondtest}}</td>
+
+										<td><b> Date of second result :</b>{{patientFullDetails.dateofsecondresult}}
+										</td>
+
+									</tr>
+									<tr style="font-size: 13px;">
+										<td><b>Second Result :</b>{{patientFullDetails.secondresult}}</td>
+									</tr>
+									<tr style="font-size: 13px;">
+										<td><b> Date of third test :</b>{{patientFullDetails.dateofthirdtest}}</td>
+
+										<td><b> Date of third result :</b>{{patientFullDetails.dateofthirdresult}}
+										</td>
+
+									</tr>
+									<tr style="font-size: 13px;">
+										<td><b>Third Result :</b>{{patientFullDetails.thirdresult}}</td>
+									</tr>
+									<!--     <tr style="font-size: 13px;">
 	      <td>{{patientFullDetails.id}}</td>
 	      <td>{{patientFullDetails.firstname}} </td>
 	      <td>{{patientFullDetails.id}}</td>
@@ -276,231 +312,246 @@ body {
 	      <td>{{patientFullDetails.id}}</td>
 	      
 	     
-	      </tr>
-	       
-	      
-	      </tbody>
-	      
-	      </table>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
-  </div>
-</div>
-	      <table class="table table-hover table-bordered" ng-hide="Clinical || inPatient">
-	      <thead>
-	      <tr>
-	      <td>Patient No </td>
-	       <td>Patient Name </td>
-	       <td>Patient No </td>
-	       <td>Action </td>
-	      
-	      
-	      </tr>
-	      </thead>
-	      <tbody>
-	      
-	      <tr ng-repeat="x in patientdata | filter : searchtxt | startFrom:currentPage*pageSize | limitTo:pageSize  " style="font-size: 13px;">
-	      <td>{{$index +1}}</td>
-	      <td><a  ng-click="openModal(x)">{{x.firstname}} </a></td>
-	      <td>{{x.mobilenumber}}</td>
-	      <td><button class="btn btn-primary" ng-click="addClin(x)">Update/Add Clinical Details</button> <button class="btn btn-primary"ng-click="addInPat(x)">Update/Add In Patient</button></td>
-	      
-	      </tr>
-	      
-	      </tbody>
-	      
-	      </table>
-	      <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
-        Previous
-    </button>
-    {{currentPage+1}}/{{numberOfPages()}}
-    <button ng-disabled="currentPage >= patientdata.length/pageSize - 1" ng-click="currentPage=currentPage+1">
-        Next
-    </button> 
-	      
-	      <div ng-show="Clinical">
-	      <button class="btn btn-primary" ng-click="backToList()">Back To Patient List</button>
-	      <h1>Clinical Details of Patient {{editPatient}}</h1>
-	      
-	      
-	      <div class="row">
-  <div class="column col-sm-5">
-     <p>Travel History :</p>
-    <input type="radio" id="TravelY" name="TravelRadio" value="Yes" ng-model="y.travelhistory">
-  <label for="TravelY">Yes</label><br>
-  <input type="radio" id="TravelN" name="TravelRadio" value="No" ng-model="y.travelhistory">
-  <label for="TravelN">No</label><br>
-  
-  
-  
-  
-     <p>Covid Status</p>
-    <input type="radio" id="CS" name="CSR" value="Suspected" ng-model="y.covidactivestatus">
-  <label for="CS">Suspected</label><br>
-  <input type="radio" id="NCS" name="CSR" value="NonSuspected" ng-model="y.covidactivestatus">
-  <label for="NCS">Non-Suspected</label><br>
- 
-  
-  
-     <p>Symptom Status:</p>
-    <input type="radio" id="ASS" name="Symp" value="asymp" ng-model="y.symptomstatus">
-  <label for="ASS">Asymptomatic</label><br>
-  <input type="radio" id="SS" name="Symp" value="symp" ng-model="y.symptomstatus">
-  <label for="SS">Symptomatic</label><br>
-  <input type="radio" id="SA" name="Symp" value="sari" ng-model="y.symptomstatus">
-  <label for="SA">SARI</label><br>
-  <input type="radio" id="il" name="Symp" value="ili" ng-model="y.symptomstatus">
-  <label for="il">ILI</label><br>
-  
-  
-  
-     <p>Action Taken:</p>
-    <input type="radio" id="HQI" name="ActionT" value="HQ" ng-model="y.actiontaken">
-  <label for="HQI">Home Quarantine</label><br>
-  <input type="radio" id="rtoc" name="ActionT" value="RTC" ng-model="y.actiontaken">
-  <label for="rtoc">Refer  To CCC</label><br>
-  <input type="radio" id="ak" name="ActionT" value="AIK" ng-model="y.actiontaken">
-  <label for="ak">Admission in KTS (DCH)</label><br>
-    <input type="radio" id="iqid" name="ActionT" value="IQ" ng-model="y.actiontaken">
-  <label for="iqid">Institutional Quarantine</label><br>
-  <input type="radio" id="cm" name="ActionT" value="RTNCM" ng-model="y.actiontaken">
-  <label for="cm">Refer to Non COVID Management</label><br>
-    </div>
-  <div class="column col-sm-5">
-  
- <p>Contact History:</p>
-    <input type="radio" id="con" name="CH" value="Yes" ng-model="y.contacthistory">
-  <label for="con">Yes</label><br>
-  <input type="radio" id="noC" name="CH" value="No" ng-model="y.contacthistory">
-  <label for="noC">No</label><br>
-  
-  
-  
-  
-     <p>Co-morbidity:</p>
-    <input type="radio" id="como" name="CHm" value="Yes" ng-model="y.comorbidity">
-  <label for="como">Yes</label><br>
-  <input type="radio" id="Comon" name="CHm" value="No" ng-model="y.comorbidity">
-  <label for="Comon">No</label><br>
-  
-   <div >
-     <b>If Yes:</b>     <input type="text" 
-            placeholder="Enter" ng-model="y.comment" />
-        </div>
+	      </tr> -->
 
 
-<button type="submit" class="btn btn-success" ng-click="submitFunctionClinical(y)">Submit</button>
-  </div>
-</div>
-	      </div>
-	      
-	      
-	      <div ng-show="inPatient">
-	     	      <button class="btn btn-primary" ng-click="backToList()">Back To Patient List</button>
-	      <h1>In Details of Patient {{editPatient}}</h1>
-	      
-	     <form class="form-horizontal" name="PatientInDetailsForm" >
-      <div class="form-group">
-        <label class="control-label col-sm-2" >Bed Alloted:  Ward No:</label>
-        <div class="col-sm-2">
-          <input type="text" class="form-control" 
-            placeholder="Enter ward" ng-model="z.bedallotment"/>
-        </div>
-      </div>
-    
-      <div class="form-group">
-        <label class="control-label col-sm-2" >Outcome:</label>
-        <div class="col-sm-4">
-          <input type="radio" id="outcomeidC" name="outcome" value="CND" ng-model="z.outcome">
-  <label for="outcomeidC">Cured and Discharged</label><br>
-  <input type="radio" id="outcomeidDM" name="outcome" value="DLA" ng-model="z.outcome">
-  <label for="outcomeidDM">DAMA/LAMA/ABS</label><br>
-  <input type="radio" id="outcomeidD" name="outcome" value="Death" ng-model="z.outcome">
-  <label for="outcomeidD">Death</label><br>
-   <input type="radio" id="outcomeidHC" name="outcome" value=RTHC ng-model="z.outcome">
-  <label for="outcomeidHC">Refer to higher center</label><br>
-   <input type="radio" id="outcomeidSA" name="outcome" value="SA" ng-model="z.outcome">
-  <label for="outcomeidSA">Still Admitted</label><br>
-  
-        </div>
-      </div>
-      
-      <h3>Reg No Particulars</h3>
-      <div class="form-group">
-      
-      
-        <!-- <label class="control-label col-sm-4" >Date of Sample Collection :</label><br> -->
-        
-    
-        <div class="col-sm-12">
-          <label >First Sample  :</label>  <br>
-          
-          <b>Date Of 1st Sample Collection</b> <input type="date" id="Sampledate1" name="Sample" ng-model="z.SamplecollectionDate1"><br>
-          <b>Result:</b>         <input type="radio" id="idA" name="FS" value="Awaited" ng-model="z.firstresult">
-  <label for="idA">Awaited</label>
-  <input type="radio" id="IDPS" name="FS" value="Positive" ng-model="z.firstresult">
-  <label for="IDPS">Positive</label>
-  <input type="radio" id="FSIDN" name="FS" value="Negative" ng-model="z.firstresult">
-  <label for="FSIDN">Negative</label><br>
-   <b>Date of Result  Of 1st Sample Collection</b> <input type="date" id="SampledateR" name="SampleR" ng-model="z.dateoffirstresult"><br><br>
-   
-   
-   <label >Second Sample  :</label>  <br>
-          
-          <b>Date Of 2nd Sample Collection</b> <input type="date" id="Sampledate2" name="Sample2" ng-model="z.SamplecollectionDate2"><br>
-          <b>Result:</b>         <input type="radio" id="idA2" name="FS2" value="Awaited" ng-model="z.secondresult">
-  <label for="id2">Awaited</label>
-  <input type="radio" id="IDPS2" name="FS2" value="Positive" ng-model="z.secondresult">
-  <label for="IDPS2">Positive</label>
-  <input type="radio" id="FSIDN2" name="FS2" value="Negative" ng-model="z.secondresult">
-  <label for="FSIDN2">Negative</label><br>
-   <b>Date of Result  Of 2nd Sample Collection</b> <input type="date" id="SampledateR2" name="SampleR2" ng-model="z.dateofsecondresult"><br><br>
-   
-   
-   
-   
-   <label >Third Sample  :</label>  <br>
-          
-          <b>Date Of Third Sample Collection</b> <input type="date" id="Sampledate3" name="Sample3" ng-model="z.SamplecollectionDate3"><br>
-          <b>Result:</b>         <input type="radio" id="idA3" name="FS3" value="Awaited" ng-model="z.thirdresult">
-  <label for="idA3">Awaited</label>
-  <input type="radio" id="IDPS3" name="FS3" value="Positive" ng-model="z.thirdresult">
-  <label for="IDPS3">Positive</label>
-  <input type="radio" id="FSIDN3" name="FS3" value="Negative" ng-model="z.thirdresult">
-  <label for="FSIDN3">Negative</label><br>
-   <b>Date of Result  Of 3rd Sample Collection</b> <input type="date" id="Sampledate13" name="Sample3" ng-model="z.dateofthirdresult"><br><br>
-  
-  <b></b>
-   
-        </div>
-   
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-          <button type="submit" class="btn btn-success" ng-click="submitFunctionInPatient(z)">Submit</button>
-        </div>
-      </div>
-    </form>
-	      
-	      
-	      
-	      </div>
-	      
-	      
-  </div>
-  
-  
-  
-  
-  
-  </div>
-  
+								</tbody>
 
-  
-</div>
-<div ng-inculde src ="PatientDet.html" ></div>
- <div ng-view></div>
+							</table>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">Close</button>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<table class="table table-hover table-bordered"
+					ng-hide="Clinical || inPatient">
+					<thead>
+						<tr>
+							<td>Patient No</td>
+							<td>Patient Name</td>
+							<td>Patient No</td>
+							<td>Action</td>
+
+
+						</tr>
+					</thead>
+					<tbody>
+
+						<tr
+							ng-repeat="x in patientdata | filter : searchtxt | startFrom:currentPage*pageSize | limitTo:pageSize  "
+							style="font-size: 13px;">
+							<td>{{$index +1}}</td>
+							<td><a ng-click="openModal(x)">{{x.firstname}} </a></td>
+							<td>{{x.mobilenumber}}</td>
+							<td><button class="btn btn-primary" ng-click="addClin(x)">Update/Add
+									Clinical Details</button>
+								<button class="btn btn-primary" ng-click="addInPat(x)">Update/Add
+									In Patient</button></td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+				<div ng-hide="Clinical || inPatient">
+					<button ng-disabled="currentPage == 0"
+						ng-click="currentPage=currentPage-1">Previous</button>
+					{{currentPage+1}}/{{numberOfPages()}}
+					<button
+						ng-disabled="currentPage >= patientdata.length/pageSize - 1"
+						ng-click="currentPage=currentPage+1">Next</button>
+				</div>
+				<div ng-show="Clinical">
+					<button class="btn btn-primary" ng-click="backToList()">Back
+						To Patient List</button>
+					<h1>Clinical Details of Patient {{editPatient}}</h1>
+
+
+					<div class="row">
+						<div class="column col-sm-5">
+							<p>Travel History :</p>
+							<input type="radio" id="TravelY" name="TravelRadio" value="Yes"
+								ng-model="y.travelhistory"> <label for="TravelY">Yes</label><br>
+							<input type="radio" id="TravelN" name="TravelRadio" value="No"
+								ng-model="y.travelhistory"> <label for="TravelN">No</label><br>
+
+
+
+
+							<p>Covid Status</p>
+							<input type="radio" id="CS" name="CSR" value="Suspected"
+								ng-model="y.covidactivestatus"> <label for="CS">Suspected</label><br>
+							<input type="radio" id="NCS" name="CSR" value="NonSuspected"
+								ng-model="y.covidactivestatus"> <label for="NCS">Non-Suspected</label><br>
+
+
+
+							<p>Symptom Status:</p>
+							<input type="radio" id="ASS" name="Symp" value="asymp"
+								ng-model="y.symptomstatus"> <label for="ASS">Asymptomatic</label><br>
+							<input type="radio" id="SS" name="Symp" value="symp"
+								ng-model="y.symptomstatus"> <label for="SS">Symptomatic</label><br>
+							<input type="radio" id="SA" name="Symp" value="sari"
+								ng-model="y.symptomstatus"> <label for="SA">SARI</label><br>
+							<input type="radio" id="il" name="Symp" value="ili"
+								ng-model="y.symptomstatus"> <label for="il">ILI</label><br>
+
+
+
+							<p>Action Taken:</p>
+							<input type="radio" id="HQI" name="ActionT" value="HQ"
+								ng-model="y.actiontaken"> <label for="HQI">Home
+								Quarantine</label><br> <input type="radio" id="rtoc" name="ActionT"
+								value="RTC" ng-model="y.actiontaken"> <label for="rtoc">Refer
+								To CCC</label><br> <input type="radio" id="ak" name="ActionT"
+								value="AIK" ng-model="y.actiontaken"> <label for="ak">Admission
+								in KTS (DCH)</label><br> <input type="radio" id="iqid"
+								name="ActionT" value="IQ" ng-model="y.actiontaken"> <label
+								for="iqid">Institutional Quarantine</label><br> <input
+								type="radio" id="cm" name="ActionT" value="RTNCM"
+								ng-model="y.actiontaken"> <label for="cm">Refer
+								to Non COVID Management</label><br>
+						</div>
+						<div class="column col-sm-5">
+
+							<p>Contact History:</p>
+							<input type="radio" id="con" name="CH" value="Yes"
+								ng-model="y.contacthistory"> <label for="con">Yes</label><br>
+							<input type="radio" id="noC" name="CH" value="No"
+								ng-model="y.contacthistory"> <label for="noC">No</label><br>
+
+
+
+
+							<p>Co-morbidity:</p>
+							<input type="radio" id="como" name="CHm" value="Yes"
+								ng-model="y.comorbidity"> <label for="como">Yes</label><br>
+							<input type="radio" id="Comon" name="CHm" value="No"
+								ng-model="y.comorbidity"> <label for="Comon">No</label><br>
+
+							<div>
+								<b>If Yes:</b> <input type="text" placeholder="Enter"
+									ng-model="y.comment" />
+							</div>
+
+
+							<button type="submit" class="btn btn-success"
+								ng-click="submitFunctionClinical(y)">Submit</button>
+						</div>
+					</div>
+				</div>
+
+
+				<div ng-show="inPatient">
+					<button class="btn btn-primary" ng-click="backToList()">Back
+						To Patient List</button>
+					<h1>In Details of Patient {{editPatient}}</h1>
+
+					<form class="form-horizontal" name="PatientInDetailsForm">
+						<div class="form-group">
+							<label class="control-label col-sm-2">Bed Alloted: Ward
+								No:</label>
+							<div class="col-sm-2">
+								<input type="text" class="form-control" placeholder="Enter ward"
+									ng-model="z.bedallotment" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label col-sm-2">Outcome:</label>
+							<div class="col-sm-4">
+								<input type="radio" id="outcomeidC" name="outcome" value="CND"
+									ng-model="z.outcome"> <label for="outcomeidC">Cured
+									and Discharged</label><br> <input type="radio" id="outcomeidDM"
+									name="outcome" value="DLA" ng-model="z.outcome"> <label
+									for="outcomeidDM">DAMA/LAMA/ABS</label><br> <input
+									type="radio" id="outcomeidD" name="outcome" value="Death"
+									ng-model="z.outcome"> <label for="outcomeidD">Death</label><br>
+								<input type="radio" id="outcomeidHC" name="outcome" value=RTHC
+									ng-model="z.outcome"> <label for="outcomeidHC">Refer
+									to higher center</label><br> <input type="radio" id="outcomeidSA"
+									name="outcome" value="SA" ng-model="z.outcome"> <label
+									for="outcomeidSA">Still Admitted</label><br>
+
+							</div>
+						</div>
+
+						<h3>Reg No Particulars</h3>
+						<div class="form-group">
+
+
+							<!-- <label class="control-label col-sm-4" >Date of Sample Collection :</label><br> -->
+
+
+							<div class="col-sm-12">
+								<label>First Sample :</label> <br> <b>Date Of 1st
+									Sample Collection</b> <input type="date" id="Sampledate1"
+									name="Sample" ng-model="z.SamplecollectionDate1"><br>
+								<b>Result:</b> <input type="radio" id="idA" name="FS"
+									value="Awaited" ng-model="z.firstresult"> <label
+									for="idA">Awaited</label> <input type="radio" id="IDPS"
+									name="FS" value="Positive" ng-model="z.firstresult"> <label
+									for="IDPS">Positive</label> <input type="radio" id="FSIDN"
+									name="FS" value="Negative" ng-model="z.firstresult"> <label
+									for="FSIDN">Negative</label><br> <b>Date of Result Of
+									1st Sample Collection</b> <input type="date" id="SampledateR"
+									name="SampleR" ng-model="z.dateoffirstresult"><br>
+								<br> <label>Second Sample :</label> <br> <b>Date
+									Of 2nd Sample Collection</b> <input type="date" id="Sampledate2"
+									name="Sample2" ng-model="z.SamplecollectionDate2"><br>
+								<b>Result:</b> <input type="radio" id="idA2" name="FS2"
+									value="Awaited" ng-model="z.secondresult"> <label
+									for="id2">Awaited</label> <input type="radio" id="IDPS2"
+									name="FS2" value="Positive" ng-model="z.secondresult">
+								<label for="IDPS2">Positive</label> <input type="radio"
+									id="FSIDN2" name="FS2" value="Negative"
+									ng-model="z.secondresult"> <label for="FSIDN2">Negative</label><br>
+								<b>Date of Result Of 2nd Sample Collection</b> <input
+									type="date" id="SampledateR2" name="SampleR2"
+									ng-model="z.dateofsecondresult"><br> <br> <label>Third
+									Sample :</label> <br> <b>Date Of Third Sample Collection</b> <input
+									type="date" id="Sampledate3" name="Sample3"
+									ng-model="z.SamplecollectionDate3"><br> <b>Result:</b>
+								<input type="radio" id="idA3" name="FS3" value="Awaited"
+									ng-model="z.thirdresult"> <label for="idA3">Awaited</label>
+								<input type="radio" id="IDPS3" name="FS3" value="Positive"
+									ng-model="z.thirdresult"> <label for="IDPS3">Positive</label>
+								<input type="radio" id="FSIDN3" name="FS3" value="Negative"
+									ng-model="z.thirdresult"> <label for="FSIDN3">Negative</label><br>
+								<b>Date of Result Of 3rd Sample Collection</b> <input
+									type="date" id="Sampledate13" name="Sample3"
+									ng-model="z.dateofthirdresult"><br> <br> <b></b>
+
+							</div>
+
+							<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-10">
+									<button type="submit" class="btn btn-success"
+										ng-click="submitFunctionInPatient(z)">Submit</button>
+								</div>
+							</div>
+					</form>
+
+
+
+				</div>
+
+
+			</div>
+
+
+
+
+
+		</div>
+
+
+
+	</div>
+	<div ng-inculde src="PatientDet.html"></div>
+	<div ng-view></div>
 </body>
 </html>

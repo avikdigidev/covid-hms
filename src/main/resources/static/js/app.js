@@ -106,7 +106,7 @@ app.controller('RegisTrationcontroller', function($scope, $http, $location,$time
  * 
  * $location.path('/'); } }
  */
-app.controller('getcontroller', function($scope, $http, $location,$window,$filter) {
+app.controller('getcontroller', function($scope, $http, $location,$window,$filter,$timeout) {
 
 	//$scope.$watch('$scope.patientDiv', $scope.getfunction);
 	$scope.$watch('searchtxt', function(newValue,oldValue){ 
@@ -161,28 +161,28 @@ app.controller('getcontroller', function($scope, $http, $location,$window,$filte
 		console.log(obj);
 		var regObj = {};
 		regObj = {
-				admittedon : obj.admittedon,
-				actiontaken : obj.actiontaken,
-				comment : obj.comment,
-				comorbidity : obj.comorbidity,
-				contacthistory : obj.contacthistory,
-				covidactivestatus: obj.covidactivestatus,
-				patientid : obj.patientid,
-				symptomstatus : obj.symptomstatus,
-				travelhistory : obj.travelhistory
+				"admittedon" : obj.admittedon,
+				"actiontaken" : obj.actiontaken,
+				"comment" : obj.comment,
+				"comorbidity" : obj.comorbidity,
+				"contacthistory" : obj.contacthistory,
+				"covidactivestatus": obj.covidactivestatus,
+				"patientid" : obj.patientid,
+				"symptomstatus" : obj.symptomstatus,
+				"travelhistory" : obj.travelhistory
 
 		}
 
 		console.log(regObj);
 		$http.post('/covid/updateInClinic', regObj).then(function(response) {
-
+console.log(response);
 			// This function handles success
-			alert("Updated Succesfully");
+		//	alert("Updated Succesfully");
 		});
 		$timeout( function(){
 			alert("Updated Successfully");
 			
-		//	$window.location.reload();
+		$window.location.reload();
 			}, 1500 		);
 
 	}
@@ -194,32 +194,33 @@ app.controller('getcontroller', function($scope, $http, $location,$window,$filte
 		
 		var regObj = {};
 		regObj = {
-				dateoffirst : obj.SamplecollectionDate1,
-				dateofsecondtest : obj.SamplecollectionDate2,
-				dateofthirdtest : obj.SamplecollectionDate3,
-				admittedon : obj.admittedon,
-				dateoffirstresult : obj.dateoffirstresult,
-				dateofsecondresult : obj.dateofsecondresult,
-				dateofthirdresult : obj.dateofthirdresult,
-				firstresult : obj.firstresult,
-				outcome : obj.outcome,
-				patientid : obj.patientid,
-				secondresult : obj.secondresult,
-				thirdresult : obj.thirdresult
+				"dateoffirst" : obj.SamplecollectionDate1,
+				"dateofsecondtest" : obj.SamplecollectionDate2,
+				"dateofthirdtest" : obj.SamplecollectionDate3,
+				"admittedon" : obj.admittedon,
+				"dateoffirstresult" : obj.dateoffirstresult,
+				"dateofsecondresult" : obj.dateofsecondresult,
+				"dateofthirdresult" : obj.dateofthirdresult,
+				"firstresult" : obj.firstresult,
+				"outcome" : obj.outcome,
+				"patientid" : obj.patientid,
+				"secondresult" : obj.secondresult,
+				"thirdresult" : obj.thirdresult
 
 		}
 
 		console.log(regObj);
 		$http.post('/covid/updateInPatient', regObj).then(function(response) {
+			console.log(response);
 
 			// This function handles success
-			alert("Updated Succesfully");
+			//alert("Updated Succesfully");
 
 		});
 		$timeout( function(){
 			alert("Updated Successfully");
 			
-		//	$window.location.reload();
+			$window.location.reload();
 			}, 1500 		);
 
 	}

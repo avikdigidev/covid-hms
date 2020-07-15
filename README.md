@@ -1,10 +1,41 @@
 Cassandra DB:
 create keyspace covid_hms with replication={'class':'SimpleStrategy', 'replication_factor':1};
 
-CREATE TABLE covid_hms.patientdetails (patientid text,admittedon date,actiontaken text,age int,bedallotment text,city text,comment text,comorbidity boolean,contacthistory boolean,country text,covidactivestatus boolean,dateoffirstresult date,dateoffirsttest date,dateofsecondresult date,dateofsecondtest date,dateofthirdresult date,dateofthirdtest date,dischargedon date,district text,dob date,dod date,firstname text,firstresult text,landmark text,lastname text,mobilenumber text,outcome text,pincode int,secondresult text,sex text,state text,symptomstatus text,thirdresult text,travelhistory boolean,PRIMARY KEY (patientid));
+CREATE TABLE covid_hms.patientdetails (
+	patientid text,
+	admittedon date,
+	actiontaken text,
+	age int,
+	bedallotment text,
+	city text,
+	comment text,
+	comorbidity boolean,
+	srfno boolean,
+	contacthistory boolean,
+	covidactivestatus boolean,
+	dateoffirstresult date,
+	dateoffirsttest date,
+	dateofsecondresult date,
+	dateofsecondtest date,
+	dateofthirdresult date,
+	dateofthirdtest date,
+	dischargedon date,
+	district text,
+	name text,
+	firstresult text,
+	mobilenumber text,
+	outcome text,
+	secondresult text,
+	sex text,
+	symptomstatus text,
+	thirdresult text,
+	travelhistory boolean,
+	lastupdatedon timestamp,
+	PRIMARY KEY (patientid)
+);
 ===============================================================================================================
 select patientid,actiontaken,admittedon,age,bedallotment,city,comment,comorbidity,contacthistory,covidactivestatus,dateoffirstresult,dateoffirsttest,dateofsecondresult,dateofsecondtest,dateofthirdresult,dateofthirdtest,district,firstname,firstresult,landmark,mobilenumber,outcome,secondresult,sex,symptomstatus,thirdresult,travelhistory  from patientdetails;
-
+select * from patientdetails;
 
 
 
@@ -30,12 +61,10 @@ POST : localhost:8080\covid\addPatient\
     "mobilenumber": "98765914676",
     "landmark": "elephant",
     "city": "uganda",
-    "state": "mh",
     "district": "undada",
     "country": "Africa",
     "pincode": 412455,
-    "dob": "2001-01-01",
-    "dod": "2020-07-08",
+    "srfno" : null,
     "admittedon": "2020-07-08",
     "dischargedon": "2020-07-08",
     "travelhistory": null,
@@ -51,9 +80,9 @@ POST : localhost:8080\covid\addPatient\
     "secondresult": null,
     "dateofthirdresult": "2020-07-08",
     "thirdresult": null,
-    "comment": null
+    "comment": null,
+    "lastupdatedon": 1902853
   }
-
 
 
 

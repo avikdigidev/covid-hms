@@ -20,7 +20,7 @@ import com.avikdigidev.covid.hms.model.Patient;
 import com.avikdigidev.covid.hms.repository.PatientRepository;
 import com.avikdigidev.covid.hms.service.PatientService;
 
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:8588")
 @RestController
 public class PatientController {
 

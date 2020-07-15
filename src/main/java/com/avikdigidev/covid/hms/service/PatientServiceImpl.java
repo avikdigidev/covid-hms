@@ -1,9 +1,9 @@
 package com.avikdigidev.covid.hms.service;
 
 import java.sql.Date;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.BeanUtils;
@@ -53,6 +53,8 @@ public class PatientServiceImpl implements PatientService {
 		Date date = new Date(System.currentTimeMillis());
 		patientRequest.setDateOfAdmission(date);
 		convertDateForAdding(patientRequest, patient);
+		Instant lastUpdatedOn = Instant.now();
+		patient.setLastUpdatedOn(lastUpdatedOn);
 		patientRepository.save(patient);
 		return "Patient Added Successfully with PaitentId: " + patientId;
 	}
@@ -123,8 +125,6 @@ public class PatientServiceImpl implements PatientService {
 	public void convertDateForAdding(PatientRequest patientRequest, Patient patient) {
 
 		patient.setDateOfAdmission(sqlToLocal(patientRequest.getDateOfAdmission()));
-		patient.setDateOfBirth(sqlToLocal(patientRequest.getDateOfBirth()));
-		patient.setDateOfDeath(sqlToLocal(patientRequest.getDateOfDeath()));
 		patient.setDateOfDischarge(sqlToLocal(patientRequest.getDateOfDischarge()));
 		patient.setDateOfFirstTest(sqlToLocal(patientRequest.getDateOfFirstTest()));
 		patient.setDateOfSecondTest(sqlToLocal(patientRequest.getDateOfSecondTest()));
@@ -136,8 +136,6 @@ public class PatientServiceImpl implements PatientService {
 
 	public void convertDateForResponse(Patient patient, PatientResponse patientResponse) {
 		patientResponse.setDateOfAdmission(cassandraLdToJavaLd(patient.getDateOfAdmission()));
-		patientResponse.setDateOfBirth(cassandraLdToJavaLd(patient.getDateOfBirth()));
-		patientResponse.setDateOfDeath(cassandraLdToJavaLd(patient.getDateOfDeath()));
 		patientResponse.setDateOfDischarge(cassandraLdToJavaLd(patient.getDateOfDischarge()));
 		patientResponse.setDateOfFirstTest(cassandraLdToJavaLd(patient.getDateOfFirstTest()));
 		patientResponse.setDateOfSecondTest(cassandraLdToJavaLd(patient.getDateOfSecondTest()));
@@ -189,6 +187,14 @@ public class PatientServiceImpl implements PatientService {
 			patient.setCovidActiveStatus(true);
 		} else if (patientRequest.getCovidActiveStatus().equals("NonSuspected")) {
 			patient.setCovidActiveStatus(false);
+		}
+
+		if (patientRequest.getSrfNo() == null) {
+			patient.setSrfNo(null);
+		} else if (patientRequest.getSrfNo().equals("Yes")) {
+			patient.setSrfNo(true);
+		} else if (patientRequest.getSrfNo().equals("No")) {
+			patient.setSrfNo(false);
 		}
 
 	}

@@ -1,3 +1,6 @@
+-added lastupdatedon
+-removed dob,dod,country, landmark, pincode, lastname
+-renamed firstname to name
 -updated UI and backend integration
 -seperated both modules while updating to handle null override of data
 -added automatic increasing build number

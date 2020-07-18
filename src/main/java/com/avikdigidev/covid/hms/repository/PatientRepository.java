@@ -1,6 +1,7 @@
 package com.avikdigidev.covid.hms.repository;
 
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.data.cassandra.repository.CassandraRepository;
@@ -20,6 +21,11 @@ public interface PatientRepository extends CassandraRepository<Patient, String> 
 	@Query(HMSConstants.SINGLE_DAY_QUERY)
 	List<Patient> getPatientsByAdmitDate(LocalDate dateOfAdmission);
 	
+	@Query(HMSConstants.PATIENT_COUNT_QUERY)
+	int getTotalPatients();
+	
+	@Query(HMSConstants.SINGLE_PATIENT_COUNT_QUERY)
+	int getTotalPatientsByDay(LocalDate dateOfAdmission);
 	
 	@Query(HMSConstants.DELETE_PATIENT_QUERY)
 	void deletePatientById(String patientId);

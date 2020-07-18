@@ -1,3 +1,4 @@
+-added dailycounter, modified incremental patientids, added count queries
 -added lastupdatedon
 -removed dob,dod,country, landmark, pincode, lastname
 -renamed firstname to name

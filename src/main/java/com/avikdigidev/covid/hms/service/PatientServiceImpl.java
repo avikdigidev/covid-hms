@@ -45,13 +45,19 @@ public class PatientServiceImpl implements PatientService {
 	}
 
 	public String createPatient(PatientRequest patientRequest) {
-		String patientId = String.valueOf(UUID.randomUUID());
+		String patientId = String.valueOf(getCountofPatients() + 1);
+		System.out.println(patientId);
+
+		// String patientId = String.valueOf(UUID.randomUUID());
 		Patient patient = new Patient();
 		stringToBooleanCoverter(patientRequest, patient);
 		BeanUtils.copyProperties(patientRequest, patient);
 		patient.setPatientId(patientId);
 		Date date = new Date(System.currentTimeMillis());
 		patientRequest.setDateOfAdmission(date);
+		String dailyPatientCounter = String.valueOf(getCountOfPatientsOnSingleDay(sqlToLocal(date)));
+		patient.setDailyPatientCounter(dailyPatientCounter);
+		System.out.println(dailyPatientCounter);
 		convertDateForAdding(patientRequest, patient);
 		Instant lastUpdatedOn = Instant.now();
 		patient.setLastUpdatedOn(lastUpdatedOn);
@@ -105,6 +111,20 @@ public class PatientServiceImpl implements PatientService {
 
 	// ---------------------------------------UTILITY
 	// METHODS------------------------------------------------------//
+
+	private int getCountofPatients() {
+		return patientRepository.getTotalPatients();
+
+	}
+
+	private int getCountOfPatientsOnSingleDay(LocalDate admittedon) {
+		if (patientRepository.getTotalPatientsByDay(admittedon) == 0) {
+			return 1;
+		} else
+			return patientRepository.getTotalPatientsByDay(admittedon)+1;
+
+	}
+
 	public java.time.LocalDate cassandraLdToJavaLd(com.datastax.driver.core.LocalDate ld) {
 		if (ld == null) {
 			return null;

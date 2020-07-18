@@ -3,16 +3,16 @@ create keyspace covid_hms with replication={'class':'SimpleStrategy', 'replicati
 
 CREATE TABLE covid_hms.patientdetails (
 	patientid text,
-	admittedon date,
 	actiontaken text,
+	admittedon date,
 	age int,
 	bedallotment text,
 	city text,
 	comment text,
 	comorbidity boolean,
-	srfno boolean,
 	contacthistory boolean,
 	covidactivestatus boolean,
+	dailypatientcounter text,
 	dateoffirstresult date,
 	dateoffirsttest date,
 	dateofsecondresult date,
@@ -21,16 +21,17 @@ CREATE TABLE covid_hms.patientdetails (
 	dateofthirdtest date,
 	dischargedon date,
 	district text,
-	name text,
 	firstresult text,
+	lastupdatedon timestamp,
 	mobilenumber text,
+	name text,
 	outcome text,
 	secondresult text,
 	sex text,
+	srfno boolean,
 	symptomstatus text,
 	thirdresult text,
 	travelhistory boolean,
-	lastupdatedon timestamp,
 	PRIMARY KEY (patientid)
 );
 ===============================================================================================================

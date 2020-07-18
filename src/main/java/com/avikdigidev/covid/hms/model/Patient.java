@@ -27,6 +27,9 @@ public class Patient {
 
 	@PrimaryKeyColumn(name = "patientid", ordinal = 0, type = PrimaryKeyType.PARTITIONED)
 	private String patientId;
+	
+	@Column(value = "dailypatientcounter")
+	private String dailyPatientCounter;
 
 	@Column(value = "name")
 	private String name;

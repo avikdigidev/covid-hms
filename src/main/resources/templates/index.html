@@ -91,7 +91,9 @@ body {
 <script type="text/javascript" src="externalJs/angular-resource.min.js"></script>
 <script type="text/javascript" src="externalJs/angular-route.min.js"></script>
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+  
 
 
 
@@ -113,9 +115,15 @@ body {
 
 
 
-		<div ng-controller="RegisTrationcontroller" style="background: white;border: 1px solid;">
+		<div ng-controller="RegisTrationcontroller"
+			style="background: white; border: 1px solid;">
 
 
+   <!--  <div id="exportthis">
+      {{data}}
+    </div>
+    <button ng-click="export()">export</button>
+ -->
 
 			<div class="topnav">
 				<a class="active" ng-click="RegDiv()">Registration</a> <a
@@ -131,14 +139,14 @@ body {
 				<div class="form-group">
 					<label class="control-label col-sm-2">Name:</label>
 					<div class="col-sm-5">
-						<input type="text" class="form-control" placeholder="Enter Name"
+						<input type="text" class="form-control" placeholder="Enter Name"  maxlength="130"
 							ng-model="x.firstname" />
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-sm-2">Age:</label>
 					<div class="col-sm-1">
-						<input type="number" class="form-control" placeholder="Age"
+						<input type="number" class="form-control" placeholder="Age"  min="0" max="150"
 							ng-model="x.age" />
 					</div>
 				</div>
@@ -156,7 +164,7 @@ body {
 				<div class="form-group">
 					<label class="control-label col-sm-2">Address:</label>
 					<div class="col-sm-5">
-						<input type="text" class="form-control"
+						<input type="text" class="form-control"  maxlength="130"
 							placeholder="Enter Address" ng-model="x.address" />
 					</div>
 				</div>
@@ -164,33 +172,132 @@ body {
 				<div class="form-group">
 					<label class="control-label col-sm-2">Village:</label>
 					<div class="col-sm-5">
-						<input type="text" class="form-control" placeholder="Village"
+						<input type="text" class="form-control" placeholder="Village"  maxlength="130"
 							ng-model="x.village" />
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-sm-2">Dist:</label>
 					<div class="col-sm-5">
-						<input type="text" class="form-control" placeholder="District"
+						<input type="text" class="form-control" placeholder="District"  maxlength="130"
 							ng-model="x.Dist" />
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-sm-2">Mobile No:</label>
 					<div class="col-sm-5">
-						<input type="number" class="form-control" placeholder="Number"
+						<input type="number" class="form-control" placeholder="Number" max="9999999999" min="0"
 							ng-model="x.Number" />
 					</div>
 				</div>
 				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-10">
+					<!-- <div class="col-sm-offset-2 col-sm-10">
 						<button type="submit" class="btn btn-success"
 							ng-click="submitFunction(x)">Submit</button>
-					</div>
+					</div> -->
 				</div>
 			</form>
+
+			<div ng-show="RegPage" style="text-align: center;">
+
+				<h1>Clinical Details of Patient {{editPatient}}</h1>
+
+
+				<div class="row" style="text-align: left; padding-left: 100px;">
+					<div class="column col-sm-5">
+						<p style="margin-top: 10px; margin-bottom: 5px;">Travel
+							History :</p>
+						<input type="radio" id="TravelY"  value="Yes"
+							ng-model="y.travelhistory"> <label for="TravelY">Yes</label><br>
+						<input type="radio" id="TravelN"  value="No"
+							ng-model="y.travelhistory"> <label for="TravelN">No</label><br>
+
+
+
+
+						<p style="margin-top: 10px; margin-bottom: 5px;">Covid Status</p>
+						<input type="radio" id="CS"  value="Suspected"
+							ng-model="y.covidactivestatus"> <label for="CS">Suspected</label><br>
+						<input type="radio" id="NCS"  value="NonSuspected"
+							ng-model="y.covidactivestatus"> <label for="NCS">Non-Suspected</label><br>
+
+
+
+						<p style="margin-top: 10px; margin-bottom: 5px;">Symptom
+							Status:</p>
+						<input type="radio" id="ASS"  value="Asymptomatic"
+							ng-model="y.symptomstatus"> <label for="ASS">Asymptomatic</label><br>
+						<input type="radio" id="SS"  value="Symptomatic"
+							ng-model="y.symptomstatus"> <label for="SS">Symptomatic</label><br>
+						<input type="radio" id="SA"  value="SARI"
+							ng-model="y.symptomstatus"> <label for="SA">SARI</label><br>
+						<input type="radio" id="il" value="ILI"
+							ng-model="y.symptomstatus"> <label for="il">ILI</label><br>
+
+
+
+						<p style="margin-top: 10px; margin-bottom: 5px;">Action Taken:</p>
+						<input type="radio" id="HQI"  value="HQ"
+							ng-model="y.actiontaken"> <label for="HQI">Home
+							Quarantine</label><br> <input type="radio" id="rtoc" 
+							value="RTC" ng-model="y.actiontaken"> <label for="rtoc">Refer
+							To CCC</label><br> <input type="radio" id="ak" 
+							value="AIK" ng-model="y.actiontaken"> <label for="ak">Admission
+							in KTS (DCH)</label><br> <input type="radio" id="iqid"
+							 value="IQ" ng-model="y.actiontaken"> <label
+							for="iqid">Institutional Quarantine</label><br> <input
+							type="radio" id="cm"  value="RTNCM"
+							ng-model="y.actiontaken"> <label for="cm">Refer
+							to Non COVID Management</label><br>
+					</div>
+					<div class="column col-sm-5">
+
+						<p style="margin-top: 10px; margin-bottom: 5px;">Contact
+							History:</p>
+						<input type="radio" id="con" value="Yes"
+							ng-model="y.contacthistory"> <label for="con">Yes</label><br>
+						<input type="radio" id="noC"  value="No"
+							ng-model="y.contacthistory"> <label for="noC">No</label><br>
+
+
+
+
+						<p style="margin-top: 10px; margin-bottom: 5px;">Co-morbidity:</p>
+						<input type="radio" id="como"  value="Yes"
+							ng-model="y.comorbidity"> <label for="como">Yes</label><br>
+						<input type="radio" id="Comon"  value="No"
+							ng-model="y.comorbidity"> <label for="Comon">No</label><br>
+
+						<div>
+							<b>If Yes:</b> <input type="text" placeholder="Enter"  maxlength="130"
+								ng-model="y.comment" />
+						</div>
+<br>
+								<p>Swab Taken:</p>
+							<input type="radio" id="ST" name="swab" value="Yes"
+								ng-model="y.SwabTaken"> <label for="ST">Yes</label><br>
+							<input type="radio" id="STN" name="swab" value="No"
+								ng-model="y.SwabTaken"> <label for="STN">No</label><br>
+
+							<div>
+								<b>If Yes:</b> <input type="text" placeholder="Enter"  maxlength="130"
+									ng-model="y.SwabComment" />
+							</div><br>
+
+						<!-- 		<button type="submit" class="btn btn-success"
+								ng-click="submitFunctionClinical(y)">Submit</button> -->
+						<br> <br>
+						<div class="col-sm-offset-2 col-sm-10"
+							style="margin-left: 0px; padding-left: 0px;">
+							<button type="submit" class="btn btn-success" style="width:95%;"
+								ng-click="submitFunction(x,y)">Submit Details</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
 			<div class="col-sm-12" ng-controller="getcontroller"
-				ng-show="patientDiv" style="background: white;border: 1px solid;">
+				ng-show="patientDiv" style="background: white; border: 1px solid;">
 				<!--  <button id="btn-id" type="button" class="btn btn-primary" ng-click="getfunction()">Get All Patient</button> -->
 				<!--  <ul>
 	          <li ng-repeat="cust in response">{{cust.firstname + " " + cust.lastname}}</li>
@@ -212,7 +319,10 @@ body {
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
 								<h4 class="modal-title">Patient Details</h4>
 							</div>
-							<table class="table table-hover table-bordered">
+							
+							<div  >
+							<!-- <p>Patient Id :<b>{{.patientid}}</b></p> -->
+							<table id="exportthis" class="table table-hover table-bordered">
 
 								<tbody>
 									<tr>
@@ -221,7 +331,7 @@ body {
 									</tr>
 									<tr style="font-size: 13px;">
 										<td><b>Patient Id :</b>{{patientFullDetails.patientid}}</td>
-										<td><b> Name :</b>{{patientFullDetails.firstname}}</td>
+										<td><b> Name :</b>{{patientFullDetails.name}}</td>
 
 									</tr>
 									<tr style="font-size: 13px;">
@@ -318,9 +428,12 @@ body {
 								</tbody>
 
 							</table>
+							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default"
 									data-dismiss="modal">Close</button>
+									
+									<button class="btn btn-default" ng-click="exportFn(patientFullDetails)">export to pdf</button>
 							</div>
 						</div>
 
@@ -344,7 +457,7 @@ body {
 							ng-repeat="x in patientdata | filter : searchtxt | startFrom:currentPage*pageSize | limitTo:pageSize  "
 							style="font-size: 13px;">
 							<td>{{$index +1}}</td>
-							<td><a ng-click="openModal(x)">{{x.firstname}} </a></td>
+							<td><a ng-click="openModal(x)">{{x.name}} </a></td>
 							<td>{{x.mobilenumber}}</td>
 							<td><button class="btn btn-primary" ng-click="addClin(x)">Update/Add
 									Clinical Details</button>
@@ -433,9 +546,20 @@ body {
 								ng-model="y.comorbidity"> <label for="Comon">No</label><br>
 
 							<div>
-								<b>If Yes:</b> <input type="text" placeholder="Enter"
+								<b>If Yes:</b> <input type="text" placeholder="Enter"  maxlength="130"
 									ng-model="y.comment" />
 							</div>
+							<br>
+								<p>Swab Taken:</p>
+							<input type="radio" id="ST" name="swab" value="Yes"
+								ng-model="y.SwabTaken"> <label for="ST">Yes</label><br>
+							<input type="radio" id="STN" name="swab" value="No"
+								ng-model="y.SwabTaken"> <label for="STN">No</label><br>
+
+							<div>
+								<b>If Yes:</b> <input type="text" placeholder="Enter"  maxlength="130"
+									ng-model="y.SwabComment" />
+							</div><br>
 
 
 							<button type="submit" class="btn btn-success"
@@ -455,7 +579,7 @@ body {
 							<label class="control-label col-sm-2">Bed Alloted: Ward
 								No:</label>
 							<div class="col-sm-2">
-								<input type="text" class="form-control" placeholder="Enter ward"
+								<input type="text" class="form-control" placeholder="Enter ward"  maxlength="130"
 									ng-model="z.bedallotment" />
 							</div>
 						</div>

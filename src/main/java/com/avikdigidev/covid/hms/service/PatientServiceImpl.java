@@ -47,7 +47,6 @@ public class PatientServiceImpl implements PatientService {
 	public String createPatient(PatientRequest patientRequest) {
 		String patientId = String.valueOf(getCountofPatients() + 1);
 		System.out.println(patientId);
-
 		// String patientId = String.valueOf(UUID.randomUUID());
 		Patient patient = new Patient();
 		stringToBooleanCoverter(patientRequest, patient);
@@ -59,6 +58,10 @@ public class PatientServiceImpl implements PatientService {
 		patient.setDailyPatientCounter(dailyPatientCounter);
 		System.out.println(dailyPatientCounter);
 		convertDateForAdding(patientRequest, patient);
+		stringToBooleanCoverter(patientRequest, patient);
+		patient.setSymptomStatus(patientRequest.getSymptomStatus());
+		patient.setActionTaken(patientRequest.getActionTaken());
+		patient.setComment(patientRequest.getComment());
 		Instant lastUpdatedOn = Instant.now();
 		patient.setLastUpdatedOn(lastUpdatedOn);
 		patientRepository.save(patient);
@@ -118,9 +121,10 @@ public class PatientServiceImpl implements PatientService {
 	}
 
 	private int getCountOfPatientsOnSingleDay(LocalDate admittedon) {
-		if (patientRepository.getTotalPatientsByDay(admittedon) == 0) {
+		if 	(patientRepository.getTotalPatientsByDay(admittedon) == 0) {
 			return 1;
-		} else
+		} 
+		else
 			return patientRepository.getTotalPatientsByDay(admittedon)+1;
 
 	}
@@ -218,4 +222,6 @@ public class PatientServiceImpl implements PatientService {
 		}
 
 	}
+
+
 }

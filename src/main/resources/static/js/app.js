@@ -31,17 +31,51 @@ app.config(function($routeProvider, $locationProvider) {
 
 // var app2 = angular.module('app', []);
 app.controller('RegisTrationcontroller', function($scope, $http, $location,$timeout,$window,$filter) {
-	$scope.submitFunction = function(obj) {
+	
+	
+	
+	
+  //  $scope.data=  [{"agence":"CTM","secteur":"Safi","statutImp":"operationnel"}];
+    
+    $scope.exportFn = function(details){
+       html2canvas(document.getElementById('exportthis'), {
+           onrendered: function (canvas) {
+               var data = canvas.toDataURL();
+               var docDefinition = {
+                   content: [{
+                       image: data,
+                       width: 500,
+                   }]
+               };
+               pdfMake.createPdf(docDefinition).download(details.patientid+"_"+details.name+".pdf");
+           }
+       });
+    }
+	
+	
+	$scope.submitFunction = function(obj,clinObj) {
+		
 		console.log(obj);
+		console.log(clinObj);
+		
 		var regObj = {};
 		regObj = {
-			firstname : obj.firstname,
-			age : obj.age,
-			sex : obj.sex,
-			city : obj.village,
-			district : obj.Dist,
-			Address : obj.address,
-			mobilenumber : obj.Number
+			"name" : obj.firstname,
+			"age" : obj.age,
+			"sex" : obj.sex,
+			"city" : obj.village,
+			"district" : obj.Dist,
+			"Address" : obj.address,
+			"mobilenumber" : obj.Number,
+			"actiontaken" : clinObj.actiontaken,
+			"comment" : clinObj.comment,
+			"comorbidity" : clinObj.comorbidity,
+			"contacthistory" : clinObj.contacthistory,
+			"covidactivestatus": clinObj.covidactivestatus,
+			"symptomstatus" : clinObj.symptomstatus,
+			"travelhistory" : clinObj.travelhistory,
+			"swabtaken":obj.SwabTaken,
+			"swabcomment":obj.SwabComment
 		}
 
 		console.log(regObj);
@@ -169,7 +203,9 @@ app.controller('getcontroller', function($scope, $http, $location,$window,$filte
 				"covidactivestatus": obj.covidactivestatus,
 				"patientid" : obj.patientid,
 				"symptomstatus" : obj.symptomstatus,
-				"travelhistory" : obj.travelhistory
+				"travelhistory" : obj.travelhistory,
+				"swabtaken":obj.SwabTaken,
+				"swabcomment":obj.SwabComment
 
 		}
 
@@ -205,7 +241,8 @@ console.log(response);
 				"outcome" : obj.outcome,
 				"patientid" : obj.patientid,
 				"secondresult" : obj.secondresult,
-				"thirdresult" : obj.thirdresult
+				"thirdresult" : obj.thirdresult,
+				"bedallotment":obj.bedallotment,
 
 		}
 
